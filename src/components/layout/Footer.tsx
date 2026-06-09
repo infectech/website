@@ -33,11 +33,11 @@ export default function Footer() {
               and deploy digital solutions for businesses worldwide.
             </p>
             <a
-              href="mailto:hello@infectech.com"
+              href="mailto:infectech.official@gmail.com"
               className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
             >
               <Mail size={14} />
-              hello@infectech.com
+              infectech.official@gmail.com
             </a>
           </div>
 

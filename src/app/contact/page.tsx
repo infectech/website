@@ -45,9 +45,9 @@ export default function ContactPage() {
               {
                 icon: Mail,
                 title: "Email Us",
-                value: "hello@infectech.com",
+                value: "infectech.official@gmail.com",
                 desc: "We reply within 24 hours",
-                href: "mailto:hello@infectech.com",
+                href: "mailto:infectech.official@gmail.com",
               },
               {
                 icon: MessageSquare,

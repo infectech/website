@@ -36,11 +36,11 @@ export default function CTA() {
               <ArrowRight size={16} />
             </Link>
             <a
-              href="mailto:hello@infectech.com"
+              href="mailto:infectech.official@gmail.com"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-slate-700 text-slate-300 font-semibold hover:bg-slate-800 transition-all duration-200 hover:-translate-y-0.5"
             >
               <Mail size={16} />
-              hello@infectech.com
+              infectech.official@gmail.com
             </a>
           </div>
 
