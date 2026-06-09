@@ -63,7 +63,7 @@ const colorMap: Record<string, string> = {
 
 export default function ServicesGrid() {
   return (
-    <section className="py-24 bg-gradient-to-b from-blue-50/60 via-white to-white dark:from-blue-950/20 dark:via-[#020617] dark:to-[#020617]">
+    <section className="py-24 bg-white dark:bg-[#020617]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

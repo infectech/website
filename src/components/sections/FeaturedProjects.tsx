@@ -33,7 +33,7 @@ const projects = [
 
 export default function FeaturedProjects() {
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-cyan-50/40 to-blue-50/60 dark:from-[#020617] dark:via-blue-950/10 dark:to-slate-950">
+    <section className="py-24 bg-white dark:bg-[#020617]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
