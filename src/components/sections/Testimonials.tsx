@@ -1,94 +1,106 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { useState } from "react";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "CEO, MediFlow Health",
-    content:
-      "Infectech delivered our healthcare management system on time and beyond expectations. Their technical expertise and attention to detail is outstanding.",
-    rating: 5,
-    initials: "SC",
-    color: "bg-blue-500",
+    quote: "Setup took 10 minutes. I wish I had this three years ago.",
+    role: "Seller using the Daffodil F-Commerce OS",
+    location: "Chattogram",
   },
   {
-    name: "James Okafor",
-    role: "Founder, ShopGrid",
-    content:
-      "The SaaS platform they built for us handles thousands of vendors seamlessly. Infectech understood our vision and executed it perfectly.",
-    rating: 5,
-    initials: "JO",
-    color: "bg-violet-500",
+    quote: "AI analytics showed exactly which products were bleeding money.",
+    role: "Seller using the Daffodil F-Commerce OS",
+    location: "Chattogram",
   },
   {
-    name: "Priya Sharma",
-    role: "Head of Operations, LogiCore",
-    content:
-      "Their AI automation solution saved us 40+ hours per week on document processing. The quality of their work is exceptional.",
-    rating: 5,
-    initials: "PS",
-    color: "bg-emerald-500",
+    quote: "COD reconciliation went from three hours to thirty seconds.",
+    role: "Seller using the Daffodil F-Commerce OS",
+    location: "Rajshahi",
+  },
+  {
+    quote: "Excel caused constant errors. Now everything is automatic, with no room for mistakes.",
+    role: "Landlord using Barighor",
+    location: "Chittagong",
+  },
+  {
+    quote: "Tenants can see their own balance now. They don't need to keep asking me.",
+    role: "Landlord using Barighor",
+    location: "Sylhet",
   },
 ];
 
 export default function Testimonials() {
-  return (
-    <section className="py-24 bg-white dark:bg-[#020617]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3">
-            Client Stories
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            What Our Clients Say
-          </h2>
-        </motion.div>
+  const [index, setIndex] = useState(0);
+  const reduce = useReducedMotion();
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
+  const next = () => setIndex((i) => (i + 1) % testimonials.length);
+  const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
+
+  return (
+    <section className="py-24 sm:py-32 bg-bg-primary">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+          className="font-display text-3xl sm:text-4xl font-semibold text-white text-center mb-4"
+        >
+          What people say about the products we&apos;ve engineered
+        </motion.h2>
+
+        <div className="relative mt-14 min-h-[220px] flex items-center">
+          <Quote size={32} className="absolute -top-4 left-1/2 -translate-x-1/2 text-brand/30" aria-hidden="true" />
+
+          <AnimatePresence mode="wait">
             <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"
+              key={index}
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? undefined : { opacity: 0, y: -12 }}
+              transition={{ duration: 0.35 }}
+              className="w-full text-center"
             >
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star
-                    key={j}
-                    size={14}
-                    className="fill-amber-400 text-amber-400"
-                  />
-                ))}
-              </div>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-6 text-sm">
-                &ldquo;{t.content}&rdquo;
+              <p className="text-xl sm:text-2xl text-white leading-snug mb-6">
+                &ldquo;{testimonials[index].quote}&rdquo;
               </p>
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-10 h-10 rounded-full ${t.color} flex items-center justify-center text-white text-sm font-bold`}
-                >
-                  {t.initials}
-                </div>
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-sm">
-                    {t.name}
-                  </div>
-                  <div className="text-xs text-slate-500">{t.role}</div>
-                </div>
-              </div>
+              <p className="text-sm text-text-secondary">
+                {testimonials[index].role} - {testimonials[index].location}
+              </p>
             </motion.div>
-          ))}
+          </AnimatePresence>
+        </div>
+
+        <div className="flex items-center justify-center gap-4 mt-10">
+          <button
+            onClick={prev}
+            aria-label="Previous testimonial"
+            className="p-2 rounded-full border border-border hover:border-border-hover text-text-secondary hover:text-white transition-colors"
+          >
+            <ChevronLeft size={16} />
+          </button>
+          <div className="flex items-center gap-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === index ? "w-6 bg-brand" : "w-1.5 bg-border"
+                }`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={next}
+            aria-label="Next testimonial"
+            className="p-2 rounded-full border border-border hover:border-border-hover text-text-secondary hover:text-white transition-colors"
+          >
+            <ChevronRight size={16} />
+          </button>
         </div>
       </div>
     </section>

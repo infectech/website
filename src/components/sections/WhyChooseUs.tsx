@@ -1,99 +1,68 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Zap, Heart, Palette, Handshake, Clock } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  Cpu,
+  ShieldCheck,
+  Layers3,
+  Building2,
+  Timer,
+  Sparkles,
+  Boxes,
+  RefreshCw,
+  Handshake,
+  Lightbulb,
+} from "lucide-react";
 
 const reasons = [
-  {
-    icon: Zap,
-    title: "Modern Technology Stack",
-    description:
-      "We use industry-standard technologies that ensure performance, security, and scalability for your product.",
-  },
-  {
-    icon: Heart,
-    title: "Client-Focused Approach",
-    description:
-      "Every project starts with understanding your business goals. We build what you actually need.",
-  },
-  {
-    icon: Palette,
-    title: "Clean Design",
-    description:
-      "Minimal, modern, and user-friendly interfaces that look great and convert visitors.",
-  },
-  {
-    icon: Handshake,
-    title: "Long-Term Support",
-    description:
-      "We don't just deliver projects — we build partnerships. Ongoing maintenance and improvements.",
-  },
-  {
-    icon: Clock,
-    title: "Fast Delivery",
-    description:
-      "Efficient development process with transparent communication and on-time delivery.",
-  },
+  { icon: Cpu, title: "Engineering First", description: "Architecture decisions come before pixels, not after." },
+  { icon: ShieldCheck, title: "Security Focused", description: "Enterprise Ready, built to pass a security review, not just a demo." },
+  { icon: Layers3, title: "Scalable Architecture", description: "Systems designed for the traffic you'll have in a year, not just today." },
+  { icon: Building2, title: "Enterprise Ready", description: "Role-based access, audit trails, and uptime that organizations can depend on." },
+  { icon: Timer, title: "Fast Delivery", description: "Transparent timelines and shipped increments, not silent months." },
+  { icon: Sparkles, title: "Clean Code", description: "Code a new engineer can read on day one, no archaeology required." },
+  { icon: Boxes, title: "Modern Tech Stack", description: "Technologies chosen for the problem, not for the resume." },
+  { icon: RefreshCw, title: "Agile Process", description: "Short cycles, real feedback, and the ability to change course early." },
+  { icon: Handshake, title: "Long-Term Partnership", description: "We stay in the room for what happens after launch." },
+  { icon: Lightbulb, title: "Innovation Driven", description: "Applied AI and automation where they solve a real problem." },
 ];
 
 export default function WhyChooseUs() {
-  return (
-    <section className="py-24 bg-white dark:bg-[#020617]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3">
-              Why Infectech
-            </p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-              Why Choose Us
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
-              Founded by three passionate builders, Infectech combines technical
-              expertise, product thinking, and modern design to deliver
-              high-quality software solutions.
-            </p>
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-100 dark:border-blue-900/50">
-              <blockquote className="text-slate-700 dark:text-slate-300 italic text-lg leading-relaxed">
-                &ldquo;Whether you&apos;re a startup validating an idea or an
-                enterprise looking for custom software, we build solutions
-                tailored to your needs.&rdquo;
-              </blockquote>
-            </div>
-          </motion.div>
+  const reduce = useReducedMotion();
 
-          <div className="space-y-5">
-            {reasons.map((r, i) => {
-              const Icon = r.icon;
-              return (
-                <motion.div
-                  key={r.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="flex gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-blue-200 dark:hover:border-blue-800 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-950 flex items-center justify-center flex-shrink-0">
-                    <Icon size={18} className="text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                      {r.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {r.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+  return (
+    <section className="py-24 sm:py-32 bg-bg-surface">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+          className="font-display text-4xl sm:text-5xl font-semibold text-white max-w-2xl mb-16"
+        >
+          Why Infectech
+        </motion.h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {reasons.map((r, i) => {
+            const Icon = r.icon;
+            return (
+              <motion.div
+                key={r.title}
+                initial={reduce ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.4, delay: (i % 5) * 0.06 }}
+                className="p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
+              >
+                <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
+                  <Icon size={18} strokeWidth={1.75} className="text-brand" />
+                </div>
+                <h3 className="font-semibold text-white mb-1.5 text-sm">{r.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{r.description}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

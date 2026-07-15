@@ -1,29 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Target, Eye, Lightbulb } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Target, Layers, Handshake } from "lucide-react";
 
-const team = [
+const pillars = [
   {
-    name: "Founder One",
-    role: "CEO & Lead Developer",
-    bio: "Full-stack engineer with deep expertise in building scalable web applications and SaaS products.",
-    initials: "F1",
-    color: "from-blue-500 to-cyan-500",
+    icon: Target,
+    title: "What we do",
+    content:
+      "Infectech partners with startups and enterprises to engineer complete digital ecosystems, not just websites or apps.",
   },
   {
-    name: "Founder Two",
-    role: "CTO & Software Architect",
-    bio: "Systems architect specializing in cloud infrastructure, DevOps, and enterprise software design.",
-    initials: "F2",
-    color: "from-violet-500 to-indigo-500",
+    icon: Layers,
+    title: "How we work",
+    content:
+      "We take products from first architecture diagram to production traffic, and we stay in the room for what happens after launch.",
   },
   {
-    name: "Founder Three",
-    role: "CPO & AI Engineer",
-    bio: "Product strategist and AI engineer focused on building intelligent automation solutions for businesses.",
-    initials: "F3",
-    color: "from-emerald-500 to-cyan-500",
+    icon: Handshake,
+    title: "What proves it",
+    content:
+      "Infectech isn't a portfolio of concepts. It's a working studio with live products currently processing real orders, rent payments, and HR workflows for paying users in production today.",
   },
 ];
 
@@ -31,158 +28,89 @@ const industries = [
   "Real Estate",
   "Healthcare",
   "Education",
-  "E-commerce",
+  "E-Commerce",
   "Logistics",
   "Finance",
   "Manufacturing",
-  "Startups",
-  "Small Businesses",
+  "HR & People Ops",
 ];
 
 export default function AboutPage() {
+  const reduce = useReducedMotion();
+
   return (
-    <div className="pt-24 pb-16 bg-white dark:bg-[#020617]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero */}
+    <div className="pt-32 pb-24 bg-bg-primary">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-20 pt-8 max-w-3xl mx-auto"
+          className="max-w-2xl mb-20"
         >
-          <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3">
-            Who We Are
-          </p>
-          <h1 className="text-5xl sm:text-6xl font-bold text-slate-900 dark:text-white mb-6">
+          <h1 className="font-display text-4xl sm:text-5xl font-semibold text-white mb-6">
             About Infectech
           </h1>
-          <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-            Infectech is a technology startup focused on helping businesses
-            transform ideas into scalable digital products. Founded by a team of
-            three developers and entrepreneurs.
+          <p className="text-lg text-text-secondary leading-relaxed">
+            A software engineering studio that designs, builds, and scales
+            production systems, AI platforms, commerce infrastructure, and
+            enterprise software, for companies that can&apos;t afford to ship
+            something fragile.
           </p>
         </motion.div>
 
-        {/* Mission / Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          {[
-            {
-              icon: Target,
-              title: "Our Mission",
-              content:
-                "To empower businesses through innovative, reliable, and scalable software solutions.",
-              color: "blue",
-            },
-            {
-              icon: Eye,
-              title: "Our Vision",
-              content:
-                "To become a globally recognized software company known for delivering exceptional digital products and long-term client partnerships.",
-              color: "cyan",
-            },
-            {
-              icon: Lightbulb,
-              title: "Our Approach",
-              content:
-                "We combine technical expertise, product thinking, and modern design to deliver solutions that solve real business problems.",
-              color: "indigo",
-            },
-          ].map((item, i) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+          {pillars.map((item, i) => {
             const Icon = item.icon;
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={reduce ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center"
+                className="p-8 rounded-2xl border border-border"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950 flex items-center justify-center mx-auto mb-4">
-                  <Icon size={20} className="text-blue-600 dark:text-blue-400" />
+                <div className="w-11 h-11 rounded-xl bg-brand/10 flex items-center justify-center mb-5">
+                  <Icon size={20} className="text-brand" strokeWidth={1.75} />
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {item.content}
-                </p>
+                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{item.content}</p>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Team */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Our Team
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
-            Three passionate builders united by a vision to create exceptional
-            software.
+          <h2 className="font-display text-3xl font-semibold text-white mb-3">The team</h2>
+          <p className="text-text-secondary max-w-xl">
+            A lean, senior team by design. Small enough that every person here
+            ships production code, not just manages it.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center"
-            >
-              <div
-                className={`w-20 h-20 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white`}
-              >
-                {member.initials}
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-1">
-                {member.name}
-              </h3>
-              <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3">
-                {member.role}
-              </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                {member.bio}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Industries */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
+          initial={reduce ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-            Industries We Serve
+          <h2 className="font-display text-3xl font-semibold text-white mb-4 mt-24">
+            Industries we serve
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-8">
-            We&apos;ve delivered solutions across diverse sectors.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {industries.map((ind, i) => (
-              <motion.span
+          <div className="flex flex-wrap gap-3">
+            {industries.map((ind) => (
+              <span
                 key={ind}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="px-4 py-2 rounded-full text-sm font-medium bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900"
+                className="px-4 py-2 rounded-full text-sm font-medium bg-brand/10 text-brand border border-brand/20"
               >
                 {ind}
-              </motion.span>
+              </span>
             ))}
           </div>
         </motion.div>

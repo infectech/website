@@ -1,72 +1,158 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { LinkedinIcon, GithubIcon, FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 
-const links = {
+const columns = {
   Company: [
-    { href: "/about", label: "About Us" },
-    { href: "/services", label: "Services" },
-    { href: "/portfolio", label: "Portfolio" },
+    { href: "/about", label: "About" },
+    { href: "/about#careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
   Services: [
     { href: "/services#custom-software", label: "Custom Software" },
-    { href: "/services#web-apps", label: "Web Applications" },
-    { href: "/services#saas", label: "SaaS Development" },
-    { href: "/services#ai", label: "AI & Automation" },
+    { href: "/services#ai", label: "AI Solutions" },
+    { href: "/services#saas", label: "SaaS Platforms" },
+    { href: "/services#enterprise", label: "Enterprise Systems" },
+  ],
+  Products: [
+    { href: "https://aihr.daffodilglobal.ai", label: "AIHR", external: true },
+    { href: "https://fc.daffodilglobal.ai", label: "Daffodil F-Commerce OS", external: true },
+    { href: "https://barighor.vercel.app", label: "Barighor", external: true },
+    { href: "https://grameenpestbd.com", label: "Grameen Pest Control", external: true },
+    { href: "https://sonic-cyan.vercel.app", label: "Sonic", external: true },
+    { href: "/portfolio#primeoms", label: "PrimeOMS (in progress)" },
+  ],
+  Resources: [
+    { href: "/#blog", label: "Blog" },
+    { href: "/#faq", label: "FAQ" },
+  ],
+  Legal: [
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
   ],
 };
 
+const socials = [
+  { href: "https://linkedin.com", icon: LinkedinIcon, label: "LinkedIn" },
+  { href: "https://github.com", icon: GithubIcon, label: "GitHub" },
+  { href: "https://facebook.com", icon: FacebookIcon, label: "Facebook" },
+  { href: "https://instagram.com", icon: InstagramIcon, label: "Instagram" },
+];
+
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribed(true);
+  };
+
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
+    <footer className="bg-bg-surface text-text-secondary border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-14">
+          <div className="lg:col-span-4">
             <Link href="/" className="inline-block mb-4">
-              <span className="text-2xl font-bold">
-                <span className="gradient-text">Infect</span>
+              <span className="font-display text-xl font-semibold">
+                <span className="gradient-text-brand">Infect</span>
                 <span className="text-white">ech</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed max-w-sm mb-6">
-              Building software that solves real problems. We design, develop,
-              and deploy digital solutions for businesses worldwide.
+              Infectech partners with startups and enterprises to engineer
+              complete digital ecosystems, from first architecture diagram to
+              production traffic.
             </p>
             <a
-              href="mailto:infectech.official@gmail.com"
-              className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              href="mailto:akibh987@gmail.com"
+              className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors mb-6"
             >
               <Mail size={14} />
-              infectech.official@gmail.com
+              akibh987@gmail.com
             </a>
+
+            <form onSubmit={handleSubscribe} className="max-w-sm">
+              <label htmlFor="footer-email" className="block text-xs font-medium text-text-primary mb-2">
+                Subscribe to our newsletter
+              </label>
+              <div className="flex gap-2">
+                <input
+                  id="footer-email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@company.com"
+                  className="flex-1 min-w-0 rounded-lg bg-white/5 border border-border px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-brand"
+                />
+                <button
+                  type="submit"
+                  className="shrink-0 px-4 py-2 rounded-lg gradient-brand text-white text-sm font-semibold hover:-translate-y-0.5 transition-transform"
+                >
+                  Subscribe
+                </button>
+              </div>
+              {subscribed && (
+                <p className="mt-2 text-xs text-success">Subscribed. Thanks for joining.</p>
+              )}
+            </form>
           </div>
 
-          {Object.entries(links).map(([title, items]) => (
-            <div key={title}>
-              <h3 className="text-sm font-semibold text-white mb-4">{title}</h3>
-              <ul className="space-y-2.5">
-                {items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-sm hover:text-slate-200 transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+            {Object.entries(columns).map(([title, items]) => (
+              <div key={title}>
+                <h3 className="text-sm font-semibold text-text-primary mb-4">{title}</h3>
+                <ul className="space-y-2.5">
+                  {items.map((item) => (
+                    <li key={item.label}>
+                      {"external" in item && item.external ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener"
+                          className="text-sm hover:text-text-primary transition-colors"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className="text-sm hover:text-text-primary transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs">
             © {new Date().getFullYear()} Infectech. All rights reserved.
           </p>
-          <p className="text-xs">
-            Custom Software • SaaS • Web Applications • AI Solutions
-          </p>
+          <div className="flex items-center gap-4">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener"
+                aria-label={s.label}
+                className="text-text-secondary hover:text-text-primary transition-colors"
+              >
+                <s.icon size={16} />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

@@ -1,126 +1,126 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { Code2, Globe, Rocket, Bot, ArrowRight, Monitor } from "lucide-react";
+import {
+  Code2,
+  Bot,
+  Layers,
+  Building2,
+  Smartphone,
+  Cloud,
+  Workflow,
+  Plug,
+  Palette,
+  ArrowRight,
+} from "lucide-react";
 
 const services = [
   {
     icon: Code2,
     title: "Custom Software Development",
-    description:
-      "End-to-end software solutions tailored to your business requirements. From ERP systems to enterprise applications.",
-    tags: ["ERP", "CRM", "Internal Tools", "Desktop Apps"],
+    description: "Full-cycle product engineering, from spec to deployed system.",
     href: "/services#custom-software",
-    color: "blue",
-  },
-  {
-    icon: Globe,
-    title: "Web Application Development",
-    description:
-      "Modern web applications built with Next.js, React, TypeScript, and PostgreSQL. SaaS platforms, dashboards, and portals.",
-    tags: ["Next.js", "React", "TypeScript", "Node.js"],
-    href: "/services#web-apps",
-    color: "cyan",
-  },
-  {
-    icon: Rocket,
-    title: "SaaS Product Development",
-    description:
-      "We help founders and businesses launch scalable SaaS products from strategy to MVP to full production.",
-    tags: ["MVP", "UI/UX", "Multi-Tenant", "Subscriptions"],
-    href: "/services#saas",
-    color: "indigo",
   },
   {
     icon: Bot,
-    title: "AI & Automation Solutions",
+    title: "AI Solutions",
     description:
-      "Integrate artificial intelligence into your business workflows. AI assistants, chatbots, and workflow automation.",
-    tags: ["AI Agents", "Chatbots", "Automation", "OpenAI"],
+      "Applied AI features, LLM integrations, and intelligent automation built into real products, not bolted on.",
     href: "/services#ai",
-    color: "violet",
   },
   {
-    icon: Monitor,
-    title: "Website Development",
+    icon: Layers,
+    title: "SaaS Platforms",
     description:
-      "Professional websites designed for performance and conversion. Landing pages, portfolios, and e-commerce stores.",
-    tags: ["Landing Pages", "E-commerce", "Corporate"],
-    href: "/services#websites",
-    color: "blue",
+      "Multi-tenant architecture, billing, and dashboards designed to scale past the first hundred users.",
+    href: "/services#saas",
+  },
+  {
+    icon: Building2,
+    title: "Enterprise Systems",
+    description:
+      "Internal tools, ERPs, and workflow platforms built for organizations that can't tolerate downtime.",
+    href: "/services#enterprise",
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile Apps",
+    description:
+      "Native-feel mobile experiences for iOS and Android, sharing a backend with your web platform.",
+    href: "/services#mobile",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud Infrastructure & DevOps",
+    description:
+      "CI/CD, containerization, and infrastructure-as-code so deployments are boring, on purpose.",
+    href: "/services#cloud",
+  },
+  {
+    icon: Workflow,
+    title: "Business Automation",
+    description:
+      "Replacing manual, spreadsheet-and-WhatsApp workflows with systems that run themselves.",
+    href: "/services#automation",
+  },
+  {
+    icon: Plug,
+    title: "API Development",
+    description: "Clean, documented, versioned APIs built to be integrated against for years.",
+    href: "/services#api",
+  },
+  {
+    icon: Palette,
+    title: "UI/UX Design & Product Strategy",
+    description:
+      "Interfaces designed around what a user actually does, not what the org chart looks like.",
+    href: "/services#design",
   },
 ];
 
-const colorMap: Record<string, string> = {
-  blue: "bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400",
-  cyan: "bg-cyan-50 dark:bg-cyan-950/30 text-cyan-600 dark:text-cyan-400",
-  indigo:
-    "bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400",
-  violet:
-    "bg-violet-50 dark:bg-violet-950/30 text-violet-600 dark:text-violet-400",
-};
-
 export default function ServicesGrid() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="py-24 bg-white dark:bg-[#020617]">
+    <section className="py-24 sm:py-32 bg-bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="max-w-2xl mb-16"
         >
-          <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3">
-            What We Do
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Our Services
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-white">
+            What we do
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            From custom software to AI-powered solutions, we deliver end-to-end
-            digital products.
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {services.map((s, i) => {
             const Icon = s.icon;
             return (
               <motion.div
                 key={s.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={reduce ? false : { opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.4, delay: (i % 3) * 0.07 }}
+                className="bg-bg-surface"
               >
                 <Link
                   href={s.href}
-                  className="group flex flex-col h-full p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
+                  className="group flex flex-col h-full p-8 hover:bg-white/[0.02] transition-colors duration-300"
                 >
-                  <div
-                    className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${colorMap[s.color]}`}
-                  >
-                    <Icon size={20} />
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 bg-brand/10 text-brand">
+                    <Icon size={20} strokeWidth={1.75} />
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                    {s.title}
-                  </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4 flex-1">
+                  <h3 className="text-lg font-semibold text-white mb-2">{s.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed mb-5 flex-1">
                     {s.description}
                   </p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {s.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:gap-2.5 transition-all">
+                  <div className="flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-2.5 transition-all">
                     Learn more <ArrowRight size={14} />
                   </div>
                 </Link>
