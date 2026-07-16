@@ -1,7 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
@@ -34,7 +35,7 @@ const testimonials = [
 
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   const next = () => setIndex((i) => (i + 1) % testimonials.length);
   const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
@@ -78,7 +79,7 @@ export default function Testimonials() {
           <button
             onClick={prev}
             aria-label="Previous testimonial"
-            className="p-2 rounded-full border border-border hover:border-border-hover text-text-secondary hover:text-white transition-colors"
+            className="p-2 rounded-full border border-border hover:border-border-hover hover:bg-white/5 text-text-secondary hover:text-white transition-all duration-150 ease-out active:scale-90"
           >
             <ChevronLeft size={16} />
           </button>
@@ -97,7 +98,7 @@ export default function Testimonials() {
           <button
             onClick={next}
             aria-label="Next testimonial"
-            className="p-2 rounded-full border border-border hover:border-border-hover text-text-secondary hover:text-white transition-colors"
+            className="p-2 rounded-full border border-border hover:border-border-hover hover:bg-white/5 text-text-secondary hover:text-white transition-all duration-150 ease-out active:scale-90"
           >
             <ChevronRight size={16} />
           </button>

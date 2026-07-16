@@ -1,7 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Mail, Clock, ArrowRight, Check } from "lucide-react";
 
 const serviceOptions = [
@@ -21,7 +22,7 @@ const timelineOptions = ["Less than 1 month", "1-3 months", "3-6 months", "6+ mo
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -219,7 +220,7 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform hover:-translate-y-0.5"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0"
                 >
                   Send Project Inquiry
                   <ArrowRight size={16} />

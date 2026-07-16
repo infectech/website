@@ -1,6 +1,7 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Code2,
@@ -87,7 +88,7 @@ const services = [
 ];
 
 export default function ServicesPage() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <div className="pt-32 pb-24 bg-bg-primary">

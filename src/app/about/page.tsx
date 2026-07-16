@@ -1,6 +1,7 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Target, Layers, Handshake } from "lucide-react";
 
 const pillars = [
@@ -24,19 +25,8 @@ const pillars = [
   },
 ];
 
-const industries = [
-  "Real Estate",
-  "Healthcare",
-  "Education",
-  "E-Commerce",
-  "Logistics",
-  "Finance",
-  "Manufacturing",
-  "HR & People Ops",
-];
-
 export default function AboutPage() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <div className="pt-32 pb-24 bg-bg-primary">
@@ -92,27 +82,6 @@ export default function AboutPage() {
             A lean, senior team by design. Small enough that every person here
             ships production code, not just manages it.
           </p>
-        </motion.div>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.4 }}
-        >
-          <h2 className="font-display text-3xl font-semibold text-white mb-4 mt-24">
-            Industries we serve
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {industries.map((ind) => (
-              <span
-                key={ind}
-                className="px-4 py-2 rounded-full text-sm font-medium bg-brand/10 text-brand border border-brand/20"
-              >
-                {ind}
-              </span>
-            ))}
-          </div>
         </motion.div>
       </div>
     </div>

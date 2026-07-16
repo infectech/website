@@ -1,7 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 
 const faqs = [
@@ -39,7 +40,7 @@ const faqs = [
 
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section id="faq" className="py-24 sm:py-32 bg-bg-surface">
@@ -62,13 +63,15 @@ export default function FAQ() {
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between gap-4 py-6 text-left"
+                  className="group w-full flex items-center justify-between gap-4 py-6 text-left"
                 >
-                  <span className="font-medium text-white">{faq.question}</span>
+                  <span className="font-medium text-white transition-colors duration-200 group-hover:text-brand-hover">
+                    {faq.question}
+                  </span>
                   <Plus
                     size={18}
-                    className={`shrink-0 text-brand transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : ""
+                    className={`shrink-0 text-brand transition-transform duration-300 ease-out ${
+                      isOpen ? "rotate-45" : "group-hover:rotate-90"
                     }`}
                   />
                 </button>

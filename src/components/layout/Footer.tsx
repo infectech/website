@@ -92,7 +92,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="shrink-0 px-4 py-2 rounded-lg gradient-brand text-white text-sm font-semibold hover:-translate-y-0.5 transition-transform"
+                  className="shrink-0 px-4 py-2 rounded-lg gradient-brand text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.96] active:translate-y-0"
                 >
                   Subscribe
                 </button>
@@ -147,7 +147,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={s.label}
-                className="text-text-secondary hover:text-text-primary transition-colors"
+                className="text-text-secondary hover:text-brand hover:-translate-y-0.5 active:scale-90 transition-all duration-200 ease-out"
               >
                 <s.icon size={16} />
               </a>

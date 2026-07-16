@@ -1,11 +1,12 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export default function CTA() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-surface relative overflow-hidden">
@@ -16,7 +17,7 @@ export default function CTA() {
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
         >
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-white mb-6 leading-tight">
             Let&apos;s build something extraordinary.
@@ -28,10 +29,10 @@ export default function CTA() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-200 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
           >
             Start Your Project
-            <ArrowRight size={16} />
+            <ArrowRight size={16} className="transition-transform duration-200 ease-out group-hover:translate-x-1" />
           </Link>
         </motion.div>
       </div>

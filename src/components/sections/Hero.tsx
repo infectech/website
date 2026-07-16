@@ -1,12 +1,15 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import NodeDiagram from "@/components/ui/NodeDiagram";
 
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
+
 export default function Hero() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-bg-primary pt-20">
@@ -19,7 +22,7 @@ export default function Hero() {
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: EASE_OUT }}
           className="text-xs font-medium uppercase tracking-[0.18em] text-text-secondary mb-6"
         >
           Software Engineering Studio
@@ -28,7 +31,7 @@ export default function Hero() {
         <motion.h1
           initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: EASE_OUT }}
           className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-[-0.02em] text-white mb-6 leading-[1.05]"
         >
           Engineering intelligent software for modern businesses.
@@ -37,7 +40,7 @@ export default function Hero() {
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: EASE_OUT }}
           className="text-lg text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           We design and build AI platforms, commerce infrastructure, and
@@ -48,34 +51,23 @@ export default function Hero() {
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: EASE_OUT }}
           className="flex flex-col sm:flex-row gap-4 justify-center mb-6"
         >
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-200 shadow-lg shadow-brand/25 hover:-translate-y-0.5"
+            className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-150 ease-out shadow-lg shadow-brand/25 hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
           >
             Start Your Project
-            <ArrowRight size={16} />
+            <ArrowRight size={16} className="transition-transform duration-200 ease-out group-hover:translate-x-1" />
           </Link>
           <Link
             href="#featured-projects"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-border text-text-primary font-semibold hover:border-border-hover hover:bg-white/5 transition-all duration-200 hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-border text-text-primary font-semibold hover:border-border-hover hover:bg-white/5 transition-all duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
           >
             View Our Work
           </Link>
         </motion.div>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-sm text-text-secondary max-w-xl mx-auto"
-        >
-          Live in production today: AI-powered HR platforms, e-commerce
-          operating systems, and fintech-adjacent SaaS used by real
-          businesses across Bangladesh and beyond.
-        </motion.p>
       </div>
     </section>
   );

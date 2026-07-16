@@ -1,7 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
-import Link from "next/link";
+import { motion } from "framer-motion";
+import TiltCard from "@/components/ui/TiltCard";
 import {
   Code2,
   Bot,
@@ -80,7 +81,7 @@ const services = [
 ];
 
 export default function ServicesGrid() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-primary">
@@ -97,7 +98,7 @@ export default function ServicesGrid() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s, i) => {
             const Icon = s.icon;
             return (
@@ -106,12 +107,12 @@ export default function ServicesGrid() {
                 initial={reduce ? false : { opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.4, delay: (i % 3) * 0.07 }}
-                className="bg-bg-surface"
+                transition={{ duration: 0.4, delay: (i % 3) * 0.06, ease: [0.23, 1, 0.32, 1] }}
               >
-                <Link
+                <TiltCard
+                  as="a"
                   href={s.href}
-                  className="group flex flex-col h-full p-8 hover:bg-white/[0.02] transition-colors duration-300"
+                  className="group flex flex-col h-full p-8 rounded-2xl border border-border bg-bg-surface hover:border-border-hover transition-colors duration-300"
                 >
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 bg-brand/10 text-brand">
                     <Icon size={20} strokeWidth={1.75} />
@@ -123,7 +124,7 @@ export default function ServicesGrid() {
                   <div className="flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-2.5 transition-all">
                     Learn more <ArrowRight size={14} />
                   </div>
-                </Link>
+                </TiltCard>
               </motion.div>
             );
           })}

@@ -1,7 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useInView, animate } from "framer-motion";
+import { motion, useInView, animate } from "framer-motion";
 
 const stats = [
   { value: 5, suffix: "", label: "Live Products in Production" },
@@ -14,7 +15,7 @@ const stats = [
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
   const [display, setDisplay] = useState(reduce ? value : 0);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 }
 
 export default function Statistics() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-primary border-y border-border">

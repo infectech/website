@@ -1,6 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import TiltCard from "@/components/ui/TiltCard";
 import {
   Cpu,
   ShieldCheck,
@@ -28,7 +30,7 @@ const reasons = [
 ];
 
 export default function WhyChooseUs() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-surface">
@@ -52,14 +54,15 @@ export default function WhyChooseUs() {
                 initial={reduce ? false : { opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.4, delay: (i % 5) * 0.06 }}
-                className="p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
+                transition={{ duration: 0.4, delay: (i % 5) * 0.06, ease: [0.23, 1, 0.32, 1] }}
               >
-                <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
-                  <Icon size={18} strokeWidth={1.75} className="text-brand" />
-                </div>
-                <h3 className="font-semibold text-white mb-1.5 text-sm">{r.title}</h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{r.description}</p>
+                <TiltCard className="p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300 h-full">
+                  <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
+                    <Icon size={18} strokeWidth={1.75} className="text-brand" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-1.5 text-sm">{r.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">{r.description}</p>
+                </TiltCard>
               </motion.div>
             );
           })}

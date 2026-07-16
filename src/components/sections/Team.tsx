@@ -1,6 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import TiltCard from "@/components/ui/TiltCard";
 
 const team = [
   {
@@ -18,7 +20,7 @@ const team = [
 ];
 
 export default function Team() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-surface">
@@ -45,12 +47,13 @@ export default function Team() {
               initial={reduce ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="p-6 rounded-2xl border border-border"
+              transition={{ duration: 0.4, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand/40 to-brand/10 mb-5" />
-              <h3 className="font-semibold text-white mb-2">{member.role}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed">{member.specialty}</p>
+              <TiltCard className="p-6 rounded-2xl border border-border h-full">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand/40 to-brand/10 mb-5" />
+                <h3 className="font-semibold text-white mb-2">{member.role}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed">{member.specialty}</p>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

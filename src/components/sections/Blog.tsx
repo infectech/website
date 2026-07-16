@@ -1,7 +1,9 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import TiltCard from "@/components/ui/TiltCard";
 
 const posts = [
   {
@@ -22,7 +24,7 @@ const posts = [
 ];
 
 export default function Blog() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section id="blog" className="py-24 sm:py-32 bg-bg-primary">
@@ -39,22 +41,26 @@ export default function Blog() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((post, i) => (
-            <motion.a
+            <motion.div
               key={post.title}
-              href="#"
               initial={reduce ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="group flex flex-col p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
+              transition={{ duration: 0.4, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
             >
-              <span className="text-xs font-mono text-brand mb-4">{post.category}</span>
-              <h3 className="font-semibold text-white mb-2 leading-snug flex-1">{post.title}</h3>
-              <p className="text-sm text-text-secondary leading-relaxed mb-5">{post.excerpt}</p>
-              <div className="flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-2.5 transition-all">
-                Read more <ArrowRight size={14} />
-              </div>
-            </motion.a>
+              <TiltCard
+                as="a"
+                href="#"
+                className="group flex flex-col h-full p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
+              >
+                <span className="text-xs font-mono text-brand mb-4">{post.category}</span>
+                <h3 className="font-semibold text-white mb-2 leading-snug flex-1">{post.title}</h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-5">{post.excerpt}</p>
+                <div className="flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-2.5 transition-all">
+                  Read more <ArrowRight size={14} />
+                </div>
+              </TiltCard>
+            </motion.div>
           ))}
         </div>
       </div>

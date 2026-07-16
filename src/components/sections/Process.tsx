@@ -1,6 +1,7 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import FlowLine from "@/components/ui/FlowLine";
 
 const steps = [
@@ -15,7 +16,7 @@ const steps = [
 ];
 
 export default function Process() {
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-primary text-white overflow-hidden">

@@ -1,7 +1,8 @@
 "use client";
+import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const stack: Record<string, string[]> = {
   Frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue"],
@@ -15,7 +16,7 @@ const categories = Object.keys(stack);
 
 export default function TechStack() {
   const [active, setActive] = useState<string | null>(null);
-  const reduce = useReducedMotion();
+  const reduce = useSafeReducedMotion();
 
   return (
     <section className="py-24 sm:py-32 bg-bg-primary">
@@ -41,7 +42,7 @@ export default function TechStack() {
               onFocus={() => setActive(cat)}
               onMouseLeave={() => setActive(null)}
               onBlur={() => setActive(null)}
-              className={`px-4 py-2 rounded-lg text-sm font-mono transition-colors duration-200 border ${
+              className={`px-4 py-2 rounded-lg text-sm font-mono transition-all duration-200 ease-out border active:scale-95 ${
                 active === cat
                   ? "border-brand text-white bg-brand/10"
                   : "border-border text-text-secondary hover:border-border-hover"
