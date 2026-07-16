@@ -60,7 +60,10 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-bg-primary text-text-primary"
+      >
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
