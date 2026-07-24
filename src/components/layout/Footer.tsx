@@ -69,11 +69,11 @@ export default function Footer() {
               production traffic.
             </p>
             <a
-              href="mailto:akibh987@gmail.com"
+              href="mailto:infectech.official@gmail.com"
               className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors mb-6"
             >
               <Mail size={14} />
-              akibh987@gmail.com
+              infectech.official@gmail.com
             </a>
 
             <form onSubmit={handleSubscribe} className="max-w-sm">

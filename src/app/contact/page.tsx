@@ -3,7 +3,9 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Clock, ArrowRight, Check } from "lucide-react";
+import { Mail, Clock, ArrowRight, Check, AlertCircle } from "lucide-react";
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdnzepe";
 
 const serviceOptions = [
   "Custom Software Development",
@@ -20,13 +22,33 @@ const serviceOptions = [
 const budgetOptions = ["Under $10k", "$10k - $30k", "$30k - $75k", "$75k+", "Not sure yet"];
 const timelineOptions = ["Less than 1 month", "1-3 months", "3-6 months", "6+ months", "Flexible"];
 
+type Status = "idle" | "submitting" | "success" | "error";
+
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
   const reduce = useSafeReducedMotion();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus("submitting");
+
+    const form = e.currentTarget;
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -56,10 +78,10 @@ export default function ContactPage() {
                     Email
                   </div>
                   <a
-                    href="mailto:akibh987@gmail.com"
+                    href="mailto:infectech.official@gmail.com"
                     className="text-sm font-semibold text-white hover:text-brand-hover transition-colors"
                   >
-                    akibh987@gmail.com
+                    infectech.official@gmail.com
                   </a>
                 </div>
               </div>
@@ -82,7 +104,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            {submitted ? (
+            {status === "success" ? (
               <div className="h-full min-h-[400px] flex items-center justify-center p-12 rounded-2xl border border-border text-center">
                 <div>
                   <div className="w-14 h-14 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4">
@@ -103,6 +125,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       id="name"
+                      name="name"
                       type="text"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
@@ -114,6 +137,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       id="company"
+                      name="company"
                       type="text"
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
                     />
@@ -127,6 +151,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       id="email"
+                      name="email"
                       type="email"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
@@ -138,6 +163,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       id="phone"
+                      name="phone"
                       type="tel"
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
                     />
@@ -150,6 +176,7 @@ export default function ContactPage() {
                   </label>
                   <select
                     id="project-type"
+                    name="project_type"
                     required
                     defaultValue=""
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
@@ -172,6 +199,7 @@ export default function ContactPage() {
                     </label>
                     <select
                       id="budget"
+                      name="budget"
                       defaultValue=""
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
                     >
@@ -191,6 +219,7 @@ export default function ContactPage() {
                     </label>
                     <select
                       id="timeline"
+                      name="timeline"
                       defaultValue=""
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
                     >
@@ -212,17 +241,26 @@ export default function ContactPage() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={5}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors resize-none"
                   />
                 </div>
 
+                {status === "error" && (
+                  <p className="flex items-center gap-2 text-sm text-red-400">
+                    <AlertCircle size={16} />
+                    Something went wrong. Please try again or email us directly.
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0"
+                  disabled={status === "submitting"}
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 disabled:opacity-60 disabled:pointer-events-none"
                 >
-                  Send Project Inquiry
+                  {status === "submitting" ? "Sending..." : "Send Project Inquiry"}
                   <ArrowRight size={16} />
                 </button>
               </form>
