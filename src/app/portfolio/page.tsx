@@ -37,7 +37,7 @@ const projects = [
     description:
       "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history.",
     tech: ["Next.js", "Multi-tenant dashboard architecture"],
-    link: "https://barighor.vercel.app",
+    link: "https://app.152.70.130.154.nip.io/",
     categories: ["SaaS"] as Category[],
   },
   {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail } from "lucide-react";
 import { LinkedinIcon, GithubIcon, FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 
@@ -20,7 +21,7 @@ const columns = {
   Products: [
     { href: "https://aihr.daffodilglobal.ai", label: "AIHR", external: true },
     { href: "https://fc.daffodilglobal.ai", label: "Daffodil F-Commerce OS", external: true },
-    { href: "https://barighor.vercel.app", label: "Barighor", external: true },
+    { href: "https://app.152.70.130.154.nip.io/", label: "Barighor", external: true },
     { href: "https://grameenpestbd.com", label: "Grameen Pest Control", external: true },
     { href: "https://sonic-cyan.vercel.app", label: "Sonic", external: true },
     { href: "/portfolio#primeoms", label: "PrimeOMS (in progress)" },
@@ -57,7 +58,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-14">
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-4">
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
+              <Image src="/images/logo white.png" alt="Infectech" width={32} height={32} />
               <span className="font-display text-xl font-semibold">
                 <span className="gradient-text-brand">Infect</span>
                 <span className="text-white">ech</span>

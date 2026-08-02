@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -42,7 +43,15 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 shrink-0 group">
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+          <Image
+            src="/images/logo white.png"
+            alt="Infectech"
+            width={28}
+            height={28}
+            priority
+            className="transition-transform duration-200 ease-out group-hover:-translate-y-px"
+          />
           <span className="font-display text-lg font-semibold tracking-tight transition-transform duration-200 ease-out group-hover:-translate-y-px inline-block">
             <span className="gradient-text-brand">Infect</span>
             <span className="text-white">ech</span>
