@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { LinkedinIcon, GithubIcon, FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 
 const columns = {
@@ -38,8 +38,12 @@ const columns = {
 
 const socials = [
   { href: "https://linkedin.com", icon: LinkedinIcon, label: "LinkedIn" },
-  { href: "https://github.com", icon: GithubIcon, label: "GitHub" },
-  { href: "https://facebook.com", icon: FacebookIcon, label: "Facebook" },
+  { href: "https://github.com/infectech", icon: GithubIcon, label: "GitHub" },
+  {
+    href: "https://www.facebook.com/profile.php?id=61591848793213",
+    icon: FacebookIcon,
+    label: "Facebook",
+  },
   { href: "https://instagram.com", icon: InstagramIcon, label: "Instagram" },
 ];
 
@@ -60,9 +64,8 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
               <Image src="/images/logo white.png" alt="Infectech" width={32} height={32} />
-              <span className="font-display text-xl font-semibold">
-                <span className="gradient-text-brand">Infect</span>
-                <span className="text-white">ech</span>
+              <span className="font-display text-xl font-semibold text-white">
+                Infectech
               </span>
             </Link>
             <p className="text-sm leading-relaxed max-w-sm mb-6">
@@ -70,13 +73,24 @@ export default function Footer() {
               complete digital ecosystems, from first architecture diagram to
               production traffic.
             </p>
-            <a
-              href="mailto:infectech.official@gmail.com"
-              className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors mb-6"
-            >
-              <Mail size={14} />
-              infectech.official@gmail.com
-            </a>
+            <div className="flex flex-col items-start gap-2 mb-6">
+              <a
+                href="mailto:infectech.official@gmail.com"
+                className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors"
+              >
+                <Mail size={14} />
+                infectech.official@gmail.com
+              </a>
+              <a
+                href="https://wa.me/8801326561196"
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors"
+              >
+                <Phone size={14} />
+                +880 1326-561196
+              </a>
+            </div>
 
             <form onSubmit={handleSubscribe} className="max-w-sm">
               <label htmlFor="footer-email" className="block text-xs font-medium text-text-primary mb-2">

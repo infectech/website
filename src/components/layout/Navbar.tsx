@@ -52,9 +52,8 @@ export default function Navbar() {
             priority
             className="transition-transform duration-200 ease-out group-hover:-translate-y-px"
           />
-          <span className="font-display text-lg font-semibold tracking-tight transition-transform duration-200 ease-out group-hover:-translate-y-px inline-block">
-            <span className="gradient-text-brand">Infect</span>
-            <span className="text-white">ech</span>
+          <span className="font-display text-lg font-semibold tracking-tight text-white transition-transform duration-200 ease-out group-hover:-translate-y-px inline-block">
+            Infectech
           </span>
         </Link>
 

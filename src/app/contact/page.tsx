@@ -3,7 +3,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Clock, ArrowRight, Check, AlertCircle } from "lucide-react";
+import { Mail, Phone, Clock, ArrowRight, Check, AlertCircle } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdnzepe";
 
@@ -82,6 +82,24 @@ export default function ContactPage() {
                     className="text-sm font-semibold text-white hover:text-brand-hover transition-colors"
                   >
                     infectech.official@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div className="flex gap-4 p-5 rounded-xl border border-border">
+                <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center shrink-0">
+                  <Phone size={18} className="text-brand" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-0.5">
+                    Call or WhatsApp
+                  </div>
+                  <a
+                    href="https://wa.me/8801326561196"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-sm font-semibold text-white hover:text-brand-hover transition-colors"
+                  >
+                    +880 1326-561196
                   </a>
                 </div>
               </div>
