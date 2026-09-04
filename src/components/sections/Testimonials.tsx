@@ -41,7 +41,7 @@ export default function Testimonials() {
   const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="py-24 sm:py-32 bg-bg-primary">
+    <section id="testimonials" className="scroll-mt-16 py-24 sm:py-32 bg-bg-primary">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={reduce ? false : { opacity: 0, y: 20 }}

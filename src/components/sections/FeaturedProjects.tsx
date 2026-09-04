@@ -97,7 +97,7 @@ export default function FeaturedProjects() {
     filter === "All" ? projects : projects.filter((p) => p.categories.includes(filter));
 
   return (
-    <section id="featured-projects" className="py-24 sm:py-32 bg-bg-surface">
+    <section id="featured-projects" className="scroll-mt-16 py-24 sm:py-32 bg-bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 20 }}
