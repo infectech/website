@@ -4,7 +4,6 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import BoxField from "@/components/ui/BoxField";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -13,13 +12,6 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-bg-primary pt-20">
-      {/* The boxes are the pattern now, so the old rule grid underneath them
-          would only add noise. */}
-      <BoxField className="absolute inset-0 w-full h-full" />
-      {/* Clears the boxes out from behind the headline and lets them frame it,
-          rather than sitting underneath the type. */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_58%_44%_at_center,var(--color-bg-primary)_45%,transparent_100%)] pointer-events-none" />
-
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-4 pb-20">
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 12 }}
