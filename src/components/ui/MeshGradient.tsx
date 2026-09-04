@@ -33,6 +33,8 @@ uniform vec3 uColorC;
 uniform vec3 uColorD;
 uniform vec3 uColorE;
 uniform float uGrain;
+uniform float uGrainScale;
+uniform float uSeed;
 
 float hash(vec2 p) {
   p = fract(p * vec2(123.34, 456.21));
@@ -69,8 +71,11 @@ void main() {
   vec2 p = uv * vec2(uResolution.x / min(uResolution.x, uResolution.y),
                      uResolution.y / min(uResolution.x, uResolution.y));
   p *= 2.2;
+  // Offsets each instance into a different part of the noise field, so a grid
+  // of cards reads as several gradients rather than the same one repeated.
+  p += uSeed;
 
-  float t = uTime * 0.12;
+  float t = uTime * 0.12 + uSeed;
 
   // First warp.
   vec2 q = vec2(fbm(p + vec2(0.0, 0.0) + t),
@@ -106,8 +111,12 @@ void main() {
   float luma = dot(colour, vec3(0.299, 0.587, 0.114));
   colour = clamp(mix(vec3(luma), colour, 1.45), 0.0, 1.0);
 
-  // Grain, animated so it shimmers instead of sitting as a fixed pattern.
-  float g = hash(gl_FragCoord.xy + fract(uTime) * 100.0) - 0.5;
+  // Film grain. Quantised to a cell a couple of device pixels across, so it
+  // stays visible instead of dissolving into the pixel grid on a retina
+  // screen, and stepped at ~20fps rather than every frame — continuous noise
+  // reads as a smooth shimmer, where film grain jitters.
+  vec2 grainCell = floor(gl_FragCoord.xy / uGrainScale);
+  float g = hash(grainCell + floor(uTime * 20.0) * 17.3) - 0.5;
   colour += g * uGrain;
 
   gl_FragColor = vec4(colour, 1.0);
@@ -136,11 +145,18 @@ function compile(gl: WebGLRenderingContext, type: number, source: string) {
 }
 
 export type MeshGradientProps = {
-  /** Five stops, mixed in order over the background. */
-  colors?: [string, string, string, string, string];
+  /** Two to five stops, mixed in order over the background. Fewer than five
+   *  are cycled to fill the shader's slots. */
+  colors?: string[];
   background?: string;
   speed?: number;
+  /** Amplitude of the film grain, 0–1. */
   grain?: number;
+  /** Size of one grain cell in CSS pixels; scaled by DPR so it looks the
+   *  same on a retina screen as on a standard one. */
+  grainScale?: number;
+  /** Shifts this instance into a different part of the noise field. */
+  seed?: number;
   className?: string;
 };
 
@@ -148,10 +164,16 @@ export default function MeshGradient({
   colors = ["#FF3087", "#1B36A6", "#00D3FF", "#6D3BFF", "#492E52"],
   background = "#003FFF",
   speed = 1,
-  grain = 0.06,
+  grain = 0.13,
+  grainScale = 1,
+  seed = 0,
   className = "",
 }: MeshGradientProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // The effect keys off the joined colours rather than the array itself: an
+  // array prop is a new identity on every render, which would tear the
+  // context down and rebuild it each time.
+  const colorKey = colors.join(",");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -197,13 +219,19 @@ export default function MeshGradient({
     const uResolution = u("uResolution");
     const uTime = u("uTime");
 
+    // Cycled, so a four-stop preset fills all five slots without a gap.
+    const stops = colorKey.split(",");
+    const stopAt = (i: number) => rgb(stops[i % stops.length]);
+
     gl.uniform3fv(u("uBackground"), rgb(background));
-    gl.uniform3fv(u("uColorA"), rgb(colors[0]));
-    gl.uniform3fv(u("uColorB"), rgb(colors[1]));
-    gl.uniform3fv(u("uColorC"), rgb(colors[2]));
-    gl.uniform3fv(u("uColorD"), rgb(colors[3]));
-    gl.uniform3fv(u("uColorE"), rgb(colors[4]));
+    gl.uniform3fv(u("uColorA"), stopAt(0));
+    gl.uniform3fv(u("uColorB"), stopAt(1));
+    gl.uniform3fv(u("uColorC"), stopAt(2));
+    gl.uniform3fv(u("uColorD"), stopAt(3));
+    gl.uniform3fv(u("uColorE"), stopAt(4));
     gl.uniform1f(u("uGrain"), grain);
+    gl.uniform1f(u("uSeed"), seed);
+    const uGrainScale = u("uGrainScale");
 
     const resize = () => {
       // Capped: this is a decorative surface, not worth 3x pixels on a phone.
@@ -216,6 +244,10 @@ export default function MeshGradient({
       canvas.height = height;
       gl.viewport(0, 0, width, height);
       gl.uniform2f(uResolution, width, height);
+      // Set here, not once at init: the cell is specified in CSS pixels, so it
+      // has to be re-expressed in device pixels whenever the DPR changes —
+      // dragging the window to a second monitor, for instance.
+      gl.uniform1f(uGrainScale, grainScale * dpr);
     };
 
     const observer = new ResizeObserver(resize);
@@ -232,16 +264,32 @@ export default function MeshGradient({
       frame = requestAnimationFrame(draw);
     };
 
+    // A grid of these means several shaders running at once, so stop drawing
+    // the moment one scrolls out of view rather than burning frames on a
+    // surface nobody can see.
+    const visibility = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !frame) {
+          frame = requestAnimationFrame(draw);
+        } else if (!entry.isIntersecting && frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+      },
+      { threshold: 0 }
+    );
+
     if (reduce) {
       // One still frame, at a point in the loop that looks composed.
       gl.uniform1f(uTime, 8);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     } else {
-      frame = requestAnimationFrame(draw);
+      visibility.observe(canvas);
     }
 
     return () => {
       cancelAnimationFrame(frame);
+      visibility.disconnect();
       observer.disconnect();
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
@@ -251,7 +299,7 @@ export default function MeshGradient({
       // release it explicitly rather than waiting for GC on every navigation.
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [colors, background, speed, grain]);
+  }, [colorKey, background, speed, grain, grainScale, seed]);
 
   return (
     <canvas

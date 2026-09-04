@@ -4,7 +4,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import LiveSystemsCard from "@/components/ui/LiveSystemsCard";
+import SystemCards from "@/components/ui/SystemCards";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -53,9 +53,9 @@ export default function Hero() {
           initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: EASE_OUT }}
-          className="mx-auto w-full max-w-sm lg:max-w-none"
+          className="mx-auto w-full max-w-md lg:max-w-none"
         >
-          <LiveSystemsCard />
+          <SystemCards />
         </motion.div>
       </div>
     </section>
