@@ -53,9 +53,6 @@ const CUBES: Cube[] = [
   { icon: Workflow, left: "78.3%", top: "76.2%", size: 54, float: 5, duration: 3.9, delay: 1.4, parallax: -0.08 },
 ];
 
-const HATCH =
-  "repeating-linear-gradient(45deg, rgba(10,10,10,0.07) 0 1px, transparent 1px 7px)";
-
 export default function HeroCanvas() {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -104,16 +101,6 @@ export default function HeroCanvas() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {/* Margin guides */}
-      <div
-        className="absolute inset-y-0 left-0 hidden w-[72px] border-r border-border lg:block"
-        style={{ backgroundImage: HATCH }}
-      />
-      <div
-        className="absolute inset-y-0 right-0 hidden w-[72px] border-l border-border lg:block"
-        style={{ backgroundImage: HATCH }}
-      />
-
       {/* The ring the cubes sit on. non-scaling-stroke keeps it hairline
           however the ellipse is stretched by preserveAspectRatio="none". */}
       <svg
