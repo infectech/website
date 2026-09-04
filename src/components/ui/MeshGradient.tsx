@@ -25,7 +25,10 @@ const FRAGMENT = `
 precision highp float;
 
 uniform vec2 uResolution;
-uniform float uTime;
+/** Flow angle, wrapped to [0, 2PI). */
+uniform float uPhase;
+/** Grain clock, wrapped to [0, 256). */
+uniform float uGrainPhase;
 uniform vec3 uBackground;
 uniform vec3 uColorA;
 uniform vec3 uColorB;
@@ -75,15 +78,24 @@ void main() {
   // of cards reads as several gradients rather than the same one repeated.
   p += uSeed;
 
-  float t = uTime * 0.12 + uSeed;
+  // The flow is driven by sampling the noise field along circles rather than
+  // by sliding it linearly with time. A linear offset grows without bound, and
+  // once the coordinates are large enough that a 32-bit float cannot separate
+  // neighbouring pixels, the field starts to crawl and jitter. Circles keep
+  // every coordinate small forever, and because the three terms are integer
+  // harmonics of one angle they all come back together at 2PI, so the loop is
+  // seamless.
+  vec2 flowA = vec2(cos(uPhase), sin(uPhase)) * 0.55;
+  vec2 flowB = vec2(cos(2.0 * uPhase + 1.7), sin(2.0 * uPhase + 1.7)) * 0.40;
+  vec2 flowC = vec2(cos(3.0 * uPhase + 4.2), sin(3.0 * uPhase + 4.2)) * 0.30;
 
   // First warp.
-  vec2 q = vec2(fbm(p + vec2(0.0, 0.0) + t),
-                fbm(p + vec2(5.2, 1.3) - t * 0.8));
+  vec2 q = vec2(fbm(p + flowA),
+                fbm(p + vec2(5.2, 1.3) + flowB));
 
   // Second warp, fed by the first — this is what makes it fold.
-  vec2 r = vec2(fbm(p + 3.5 * q + vec2(1.7, 9.2) + t * 0.7),
-                fbm(p + 3.5 * q + vec2(8.3, 2.8) - t * 0.5));
+  vec2 r = vec2(fbm(p + 3.5 * q + vec2(1.7, 9.2) + flowC),
+                fbm(p + 3.5 * q + vec2(8.3, 2.8) - flowB));
 
   float f = fbm(p + 3.0 * r);
 
@@ -116,12 +128,20 @@ void main() {
   // screen, and stepped at ~20fps rather than every frame — continuous noise
   // reads as a smooth shimmer, where film grain jitters.
   vec2 grainCell = floor(gl_FragCoord.xy / uGrainScale);
-  float g = hash(grainCell + floor(uTime * 20.0) * 17.3) - 0.5;
+  float g = hash(grainCell + uGrainPhase * 17.3) - 0.5;
   colour += g * uGrain;
 
   gl_FragColor = vec4(colour, 1.0);
 }
 `;
+
+const TAU = Math.PI * 2;
+/** Radians of flow per second at speed 1; sets the loop length. */
+const FLOW_RATE = 0.12;
+/** Grain updates per second — film jitters, it does not shimmer. */
+const GRAIN_FPS = 20;
+/** Distinct grain patterns before repeating. */
+const GRAIN_STEPS = 256;
 
 /** "#RRGGBB" to normalised rgb. */
 function rgb(hex: string): [number, number, number] {
@@ -217,7 +237,8 @@ export default function MeshGradient({
 
     const u = (name: string) => gl.getUniformLocation(program, name);
     const uResolution = u("uResolution");
-    const uTime = u("uTime");
+    const uPhase = u("uPhase");
+    const uGrainPhase = u("uGrainPhase");
 
     // Cycled, so a four-stop preset fills all five slots without a gap.
     const stops = colorKey.split(",");
@@ -259,7 +280,14 @@ export default function MeshGradient({
     let frame = 0;
     const start = performance.now();
     const draw = (now: number) => {
-      gl.uniform1f(uTime, ((now - start) / 1000) * speed);
+      const elapsed = (now - start) / 1000;
+      // Both clocks are wrapped before they reach the shader. Left to run,
+      // they climb until a 32-bit float can no longer resolve one frame from
+      // the next, which is what makes a long-running gradient start to
+      // shudder. TAU is the flow's natural period, so wrapping there is
+      // invisible; the grain is noise, so any wrap is invisible.
+      gl.uniform1f(uPhase, (elapsed * speed * FLOW_RATE) % TAU);
+      gl.uniform1f(uGrainPhase, Math.floor(elapsed * GRAIN_FPS) % GRAIN_STEPS);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
       frame = requestAnimationFrame(draw);
     };
@@ -281,7 +309,8 @@ export default function MeshGradient({
 
     if (reduce) {
       // One still frame, at a point in the loop that looks composed.
-      gl.uniform1f(uTime, 8);
+      gl.uniform1f(uPhase, 1.9);
+      gl.uniform1f(uGrainPhase, 7);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     } else {
       visibility.observe(canvas);
