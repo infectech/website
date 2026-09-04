@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
@@ -30,11 +30,39 @@ const SLIDE_S = 0.42;
 const EXIT_MS = 750;
 const TOTAL_MS = WORDS_MS + EXIT_MS;
 
+// Shown once per visit. sessionStorage rather than localStorage so it greets
+// someone arriving in a new tab or after closing the browser, but not on
+// every reload or full-document navigation within the same visit. The same
+// key is read by a blocking script in the layout, which hides the overlay
+// before first paint — without that, a reload would flash it before this
+// component could mount and take it down.
+export const INTRO_SEEN_KEY = "infectech:intro-seen";
+
+const alreadyGreeted = () => {
+  try {
+    return sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
+  } catch {
+    return false; // private mode / storage blocked: just play the intro
+  }
+};
+
+const rememberGreeted = () => {
+  try {
+    sessionStorage.setItem(INTRO_SEEN_KEY, "1");
+  } catch {
+    /* nothing to do — the intro simply plays again next time */
+  }
+};
+
 export default function GreetingIntro() {
   const reduce = useSafeReducedMotion();
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
   const [done, setDone] = useState(false);
+  // Set in the effect below, and read by the scroll-lock effect in the same
+  // commit — `done` has not re-rendered yet at that point, so without this the
+  // lock is applied and immediately reverted on every already-greeted load.
+  const greetedRef = useRef(false);
 
   // `reduce` is false until after mount, so the overlay renders for a single
   // frame and then dismisses instantly — no animation, no hydration mismatch.
@@ -42,6 +70,16 @@ export default function GreetingIntro() {
 
   useEffect(() => {
     if (reduce) return;
+
+    // Second visit within the session: the layout script has already hidden
+    // the overlay, so take it down without running the sequence at all.
+    if (alreadyGreeted()) {
+      greetedRef.current = true;
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reading sessionStorage, an external store, not derivable from props/state
+      setDone(true);
+      return;
+    }
+    rememberGreeted();
 
     const timers = GREETINGS.map((_, i) =>
       window.setTimeout(() => setIndex(i), OFFSETS[i])
@@ -55,7 +93,7 @@ export default function GreetingIntro() {
   // Released as soon as the panel starts lifting, not when it unmounts — the
   // page is uncovering underneath for that whole travel, so it should scroll.
   useEffect(() => {
-    if (!visible || leaving) return;
+    if (!visible || leaving || greetedRef.current) return;
     const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
     return () => {
@@ -73,6 +111,7 @@ export default function GreetingIntro() {
       initial={{ y: "0%" }}
       animate={{ y: leaving ? "-100%" : "0%" }}
       transition={{ duration: EXIT_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
+      id="greeting-intro"
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary pointer-events-none"
       aria-hidden="true"
     >

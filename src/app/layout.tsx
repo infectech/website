@@ -65,6 +65,22 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-bg-primary text-text-primary"
       >
+        {/*
+          Runs before the overlay below is parsed, so a reload within the same
+          visit never flashes the greeting: the server cannot know whether this
+          visitor has been greeted, so the markup always contains the overlay
+          and this hides it before it can paint. GreetingIntro then unmounts it.
+
+          It injects its own style element rather than relying on a rule in
+          globals.css, which is loaded asynchronously and is measurably not yet
+          applied at this point — the rule has to exist before the overlay is
+          parsed, not merely before hydration.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('infectech:intro-seen')==='1'){var s=document.createElement('style');s.textContent='#greeting-intro{display:none!important}';document.head.appendChild(s)}}catch(e){}`,
+          }}
+        />
         <GreetingIntro />
         <Navbar />
         <main className="flex-1">{children}</main>
