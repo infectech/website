@@ -73,7 +73,7 @@ function ItemLink({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
 
 function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void }) {
   return (
-    <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-border bg-bg-surface shadow-[0_12px_36px_rgba(10,10,10,0.08)]">
+    <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-border bg-bg-surface shadow-[0_12px_36px_rgba(10,10,10,0.08)]">
       <div className="grid grid-cols-1 gap-x-5 gap-y-4 p-4 sm:grid-cols-2">
         {menu.columns.map((column) => (
           <div key={column.title}>
@@ -274,12 +274,24 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: EASE_OUT }}
             onMouseEnter={cancelClose}
-            className="absolute inset-x-0 top-16 hidden px-4 pb-6 sm:px-6 lg:block lg:px-8"
+            className="absolute inset-x-0 top-16 hidden pb-6 lg:block"
           >
-            <MenuPanel
-              menu={MENUS.find((m) => m.id === openMenu)!}
-              onNavigate={closeAll}
-            />
+            {/* Same container as the nav row, so the panel's edge lines up with
+                the trigger group's edge. Centring it would open the panel in
+                the middle of the screen, a long way from the trigger the
+                pointer is actually on. */}
+            <div
+              className={`mx-auto flex max-w-7xl px-4 sm:px-6 lg:px-8 ${
+                RIGHT_MENUS.some((m) => m.id === openMenu)
+                  ? "justify-end"
+                  : "justify-start"
+              }`}
+            >
+              <MenuPanel
+                menu={MENUS.find((m) => m.id === openMenu)!}
+                onNavigate={closeAll}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
