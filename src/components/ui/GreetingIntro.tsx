@@ -17,23 +17,15 @@ const GREETINGS = [
   "안녕하세요",
 ];
 
-// Each greeting is held for less time than the one before it, so the intro
-// opens deliberately and then accelerates away instead of outstaying its
-// welcome. Floored at MIN_MS because below roughly that the words stop
-// registering as words.
-const FIRST_MS = 620;
-const DECAY = 0.72;
-const MIN_MS = 130;
+// Every greeting gets the same beat — long enough to actually read, and well
+// clear of the ~130ms floor below which words stop registering as words.
+const WORD_MS = 350;
 
-const SLOTS = GREETINGS.map((_, i) =>
-  Math.max(MIN_MS, Math.round(FIRST_MS * DECAY ** i))
-);
+const OFFSETS = GREETINGS.map((_, i) => i * WORD_MS);
 
-// Cumulative start time of each greeting.
-const OFFSETS = SLOTS.reduce<number[]>(
-  (acc, slot, i) => [...acc, (acc[i - 1] ?? 0) + (SLOTS[i - 1] ?? 0)],
-  []
-);
+// The per-word fade has to finish inside WORD_MS, otherwise a greeting is
+// swapped out mid-fade and the sequence reads as a flicker instead of words.
+const FADE_S = 0.16;
 
 // The whole intro, entrance through exit. Rather than ending on a beat of
 // stillness and then dismissing, the overlay starts dissolving partway
@@ -43,10 +35,6 @@ const TOTAL_MS = 3200;
 const FADE_FROM = GREETINGS.indexOf("নমস্কার");
 const FADE_AT_MS = OFFSETS[FADE_FROM];
 const EXIT_MS = TOTAL_MS - FADE_AT_MS;
-
-// The fade must finish well inside its own slot, otherwise the greeting is
-// swapped out mid-fade and the intro reads as a flicker instead of words.
-const fadeFor = (i: number) => Math.min(0.24, (SLOTS[i] * 0.45) / 1000);
 
 export default function GreetingIntro() {
   const reduce = useSafeReducedMotion();
@@ -103,7 +91,7 @@ export default function GreetingIntro() {
           key={index}
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: fadeFor(index), ease: EASE_OUT }}
+          transition={{ duration: FADE_S, ease: EASE_OUT }}
           className="display-lg text-5xl sm:text-7xl text-ink"
         >
           {GREETINGS[index]}
