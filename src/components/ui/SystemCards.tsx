@@ -41,6 +41,7 @@ function Card({
         speed={preset.speed}
         wireframe={preset.wireframe ?? 0}
         wireCell={preset.wireCell ?? 7}
+        wireWarp={preset.wireWarp ?? 1.5}
         seed={system.seed}
       />
       {/* Anchors the type against whatever the gradient is doing behind it. */}

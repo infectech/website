@@ -10,6 +10,8 @@ export type GradientPreset = {
   wireframe?: number;
   /** Lattice spacing in CSS pixels. */
   wireCell?: number;
+  /** How far the flow displaces the lattice, in cells. */
+  wireWarp?: number;
 };
 
 /**
@@ -43,5 +45,6 @@ export const GRADIENT_PRESETS: GradientPreset[] = [
     // wireframe: true.
     wireframe: 1,
     wireCell: 7,
+    wireWarp: 1.5,
   },
 ];

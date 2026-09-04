@@ -37,6 +37,7 @@ uniform float uGrainScale;
 uniform float uSeed;
 uniform float uWire;
 uniform float uWireCell;
+uniform float uWireWarp;
 
 float hash(vec2 p) {
   p = fract(p * vec2(123.34, 456.21));
@@ -118,7 +119,12 @@ void main() {
   // which is what makes the grid read as structure rather than an overlaid
   // texture.
   if (uWire > 0.0) {
-    vec2 cell = fract(gl_FragCoord.xy / uWireCell);
+    // Displaced by the same field that drives the colour, so the lattice
+    // ripples the way a real deformed mesh would. In fixed screen space the
+    // grid sits perfectly still and the card reads as a static image, however
+    // much the colour underneath is moving.
+    vec2 wireUv = gl_FragCoord.xy / uWireCell + (r - 0.5) * uWireWarp;
+    vec2 cell = fract(wireUv);
     // Distance to the nearest grid line, in device pixels.
     vec2 edge = min(cell, 1.0 - cell) * uWireCell;
     float line = 1.0 - smoothstep(0.5, 1.5, min(edge.x, edge.y));
@@ -176,6 +182,8 @@ export type MeshGradientProps = {
   wireframe?: number;
   /** Grid spacing in CSS pixels, scaled by DPR. */
   wireCell?: number;
+  /** How far the flow field displaces the lattice, in cells. */
+  wireWarp?: number;
   className?: string;
 };
 
@@ -188,6 +196,7 @@ export default function MeshGradient({
   seed = 0,
   wireframe = 0,
   wireCell = 7,
+  wireWarp = 1.5,
   className = "",
 }: MeshGradientProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -253,6 +262,7 @@ export default function MeshGradient({
     gl.uniform1f(u("uGrain"), grain);
     gl.uniform1f(u("uSeed"), seed);
     gl.uniform1f(u("uWire"), wireframe);
+    gl.uniform1f(u("uWireWarp"), wireWarp);
     const uGrainScale = u("uGrainScale");
     const uWireCell = u("uWireCell");
 
@@ -332,6 +342,7 @@ export default function MeshGradient({
     seed,
     wireframe,
     wireCell,
+    wireWarp,
   ]);
 
   return (
