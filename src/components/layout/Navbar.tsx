@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -22,6 +22,14 @@ const RIGHT_MENUS = MENUS.slice(2);
 // A pointer crossing the gap between a trigger and its panel would otherwise
 // close the menu mid-travel.
 const CLOSE_DELAY_MS = 120;
+
+// Panel geometry. The nav is a centred cluster, so triggers do not sit at any
+// fixed edge and the panel has to be placed against the measured trigger.
+const PANEL_MAX_W = 768;
+const VIEWPORT_PAD = 16;
+// Overhang, so the panel reads as hanging off its trigger rather than starting
+// hard against it.
+const PANEL_OVERHANG = 12;
 
 function ItemLink({ item, onNavigate }: { item: NavItem; onNavigate: () => void }) {
   const Icon = item.icon;
@@ -104,6 +112,9 @@ export default function Navbar() {
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
   const closeTimer = useRef<number | undefined>(undefined);
+  const headerRef = useRef<HTMLElement>(null);
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [panel, setPanel] = useState({ left: 0, width: PANEL_MAX_W });
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -129,6 +140,40 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => () => window.clearTimeout(closeTimer.current), []);
+
+  // Place the panel against its trigger: left-hand menus hang from the
+  // trigger's left edge, right-hand menus from its right edge, both clamped
+  // inside the viewport. Re-measured on resize, since the cluster moves.
+  useLayoutEffect(() => {
+    if (!openMenu) return;
+
+    const place = () => {
+      const button = triggerRefs.current[openMenu];
+      const header = headerRef.current;
+      if (!button || !header) return;
+
+      const hostWidth = header.clientWidth;
+      const width = Math.min(PANEL_MAX_W, hostWidth - VIEWPORT_PAD * 2);
+      const rect = button.getBoundingClientRect();
+      const headerLeft = header.getBoundingClientRect().left;
+
+      const left = RIGHT_MENUS.some((m) => m.id === openMenu)
+        ? rect.right - headerLeft + PANEL_OVERHANG - width
+        : rect.left - headerLeft - PANEL_OVERHANG;
+
+      setPanel({
+        left: Math.max(
+          VIEWPORT_PAD,
+          Math.min(left, hostWidth - width - VIEWPORT_PAD)
+        ),
+        width,
+      });
+    };
+
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [openMenu]);
 
   const cancelClose = () => window.clearTimeout(closeTimer.current);
 
@@ -160,6 +205,9 @@ export default function Navbar() {
     return (
       <button
         key={menu.id}
+        ref={(el) => {
+          triggerRefs.current[menu.id] = el;
+        }}
         type="button"
         aria-expanded={isOpen}
         aria-controls={`menu-${menu.id}`}
@@ -183,6 +231,7 @@ export default function Navbar() {
 
   return (
     <header
+      ref={headerRef}
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out ${
         solid
           ? "border-b border-border bg-[rgba(250,250,250,0.86)] backdrop-blur-xl"
@@ -191,9 +240,11 @@ export default function Navbar() {
       onMouseLeave={scheduleClose}
     >
       {/* Three tracks with equal outer columns, so the wordmark is centred on
-          the viewport rather than on whichever nav group happens to be wider. */}
-      <nav className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 lg:px-8">
-        <div className="hidden items-center gap-1 justify-self-start lg:flex">
+          the viewport rather than on whichever nav group happens to be wider.
+          Both groups are pulled in towards the wordmark rather than out to the
+          container edges, so the nav reads as one cluster. */}
+      <nav className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-x-6 px-4 sm:px-6 lg:gap-x-10 lg:px-8">
+        <div className="hidden items-center gap-1 justify-self-end lg:flex">
           {LEFT_MENUS.map(trigger)}
         </div>
 
@@ -218,7 +269,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 justify-self-end lg:flex">
+        <div className="hidden items-center gap-1 justify-self-start lg:flex">
           {RIGHT_MENUS.map(trigger)}
           {DIRECT_LINKS.map((l) => (
             <Link
@@ -274,24 +325,13 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: EASE_OUT }}
             onMouseEnter={cancelClose}
-            className="absolute inset-x-0 top-16 hidden pb-6 lg:block"
+            style={{ left: panel.left, width: panel.width }}
+            className="absolute top-16 hidden pb-6 lg:block"
           >
-            {/* Same container as the nav row, so the panel's edge lines up with
-                the trigger group's edge. Centring it would open the panel in
-                the middle of the screen, a long way from the trigger the
-                pointer is actually on. */}
-            <div
-              className={`mx-auto flex max-w-7xl px-4 sm:px-6 lg:px-8 ${
-                RIGHT_MENUS.some((m) => m.id === openMenu)
-                  ? "justify-end"
-                  : "justify-start"
-              }`}
-            >
-              <MenuPanel
-                menu={MENUS.find((m) => m.id === openMenu)!}
-                onNavigate={closeAll}
-              />
-            </div>
+            <MenuPanel
+              menu={MENUS.find((m) => m.id === openMenu)!}
+              onNavigate={closeAll}
+            />
           </motion.div>
         )}
       </AnimatePresence>
