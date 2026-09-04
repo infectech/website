@@ -4,7 +4,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import NodeDiagram from "@/components/ui/NodeDiagram";
+import BoxField from "@/components/ui/BoxField";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -13,10 +13,12 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-bg-primary pt-20">
-      <NodeDiagram className="absolute inset-0 w-full h-full opacity-60" />
-
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(10,10,10,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(10,10,10,0.035)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,var(--color-bg-primary)_100%)] pointer-events-none" />
+      {/* The boxes are the pattern now, so the old rule grid underneath them
+          would only add noise. */}
+      <BoxField className="absolute inset-0 w-full h-full" />
+      {/* Clears the boxes out from behind the headline and lets them frame it,
+          rather than sitting underneath the type. */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_58%_44%_at_center,var(--color-bg-primary)_45%,transparent_100%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-4 pb-20">
         <motion.p
