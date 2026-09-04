@@ -9,7 +9,8 @@ import { LinkedinIcon, GithubIcon, FacebookIcon, InstagramIcon } from "@/compone
 const columns = {
   Company: [
     { href: "/about", label: "About" },
-    { href: "/about#careers", label: "Careers" },
+    // No careers section exists yet; point at the page rather than a dud anchor.
+    { href: "/about", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
   Services: [
@@ -24,7 +25,7 @@ const columns = {
     { href: "https://app.152.70.130.154.nip.io/", label: "Barighor", external: true },
     { href: "https://grameenpestbd.com", label: "Grameen Pest Control", external: true },
     { href: "https://sonic-cyan.vercel.app", label: "Sonic", external: true },
-    { href: "/portfolio#primeoms", label: "PrimeOMS (in progress)" },
+    { href: "/#primeoms", label: "PrimeOMS (in progress)" },
   ],
   Resources: [
     { href: "/#blog", label: "Blog" },

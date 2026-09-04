@@ -27,20 +27,20 @@ function ItemLink({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
   const Icon = item.icon;
   const content = (
     <>
-      <span className="mt-0.5 shrink-0 text-ink transition-transform duration-200 ease-out group-hover/item:-translate-y-px">
-        <Icon size={18} strokeWidth={1.6} />
+      <span className="mt-px shrink-0 text-ink transition-transform duration-200 ease-out group-hover/item:-translate-y-px">
+        <Icon size={16} strokeWidth={1.6} />
       </span>
       <span className="min-w-0">
-        <span className="flex items-center gap-1 text-sm font-semibold text-ink">
+        <span className="flex items-center gap-1 text-[13px] font-semibold leading-tight text-ink">
           {item.label}
           {item.external && (
             <ArrowUpRight
-              size={13}
+              size={12}
               className="shrink-0 text-text-muted transition-transform duration-200 ease-out group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5"
             />
           )}
         </span>
-        <span className="mt-0.5 block text-[13px] leading-snug text-text-secondary">
+        <span className="mt-0.5 block text-xs leading-snug text-text-secondary">
           {item.description}
         </span>
       </span>
@@ -48,7 +48,7 @@ function ItemLink({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
   );
 
   const className =
-    "group/item flex gap-3 rounded-xl p-3 transition-colors duration-150 hover:bg-bg-muted";
+    "group/item flex gap-2.5 rounded-lg px-2.5 py-2 transition-colors duration-150 hover:bg-bg-muted";
 
   if (item.external) {
     return (
@@ -73,11 +73,11 @@ function ItemLink({ item, onNavigate }: { item: NavItem; onNavigate: () => void 
 
 function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void }) {
   return (
-    <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-border bg-bg-surface shadow-[0_16px_48px_rgba(10,10,10,0.08)]">
-      <div className="grid grid-cols-1 gap-x-8 gap-y-6 p-6 sm:grid-cols-2">
+    <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-border bg-bg-surface shadow-[0_12px_36px_rgba(10,10,10,0.08)]">
+      <div className="grid grid-cols-1 gap-x-5 gap-y-4 p-4 sm:grid-cols-2">
         {menu.columns.map((column) => (
           <div key={column.title}>
-            <p className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-text-muted">
+            <p className="mb-1 px-2.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-text-muted">
               {column.title}
             </p>
             <div className="flex flex-col">
@@ -89,7 +89,7 @@ function MenuPanel({ menu, onNavigate }: { menu: NavMenu; onNavigate: () => void
         ))}
       </div>
 
-      <div className="border-t border-border bg-bg-primary p-3">
+      <div className="border-t border-border bg-bg-primary p-2">
         <ItemLink item={menu.feature} onNavigate={onNavigate} />
       </div>
     </div>
