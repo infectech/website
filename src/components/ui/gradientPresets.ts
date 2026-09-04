@@ -6,6 +6,10 @@ export type GradientPreset = {
   /** Film grain amplitude, 0–1. Some presets carry none. */
   grain: number;
   speed: number;
+  /** Neat's `wireframe`: 0 draws a solid surface, 1 draws the mesh lattice. */
+  wireframe?: number;
+  /** Lattice spacing in CSS pixels. */
+  wireCell?: number;
 };
 
 /**
@@ -32,9 +36,12 @@ export const GRADIENT_PRESETS: GradientPreset[] = [
     name: "Solar",
     colors: ["#FF5373", "#FFC858", "#17E7FF", "#6D3BFF"],
     background: "#003FFF",
-    // This config sets grainIntensity 0 — clean, no grain.
+    // This config sets grainIntensity 0 — the lattice is the texture.
     grain: 0,
     // Neat speed 2, kept in proportion to Aurora's 3.5.
     speed: 0.46,
+    // wireframe: true.
+    wireframe: 1,
+    wireCell: 7,
   },
 ];

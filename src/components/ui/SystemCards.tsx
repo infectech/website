@@ -39,6 +39,8 @@ function Card({
         background={preset.background}
         grain={preset.grain}
         speed={preset.speed}
+        wireframe={preset.wireframe ?? 0}
+        wireCell={preset.wireCell ?? 7}
         seed={system.seed}
       />
       {/* Anchors the type against whatever the gradient is doing behind it. */}
