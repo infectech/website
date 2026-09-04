@@ -4,20 +4,12 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
-const GREETINGS = [
-  "Hello",
-  "Bonjour",
-  "Hola",
-  "নমস্কার",
-  "こんにちは",
-  "Ciao",
-  "مرحبا",
-  "안녕하세요",
-];
+// নমস্কার sits third because the dissolve is anchored to it — see FADE_FROM.
+const GREETINGS = ["Hello", "Ciao", "নমস্কার", "مرحبا"];
 
-// Every greeting gets the same beat — long enough to actually read, and well
-// clear of the ~130ms floor below which words stop registering as words.
-const WORD_MS = 350;
+// Every greeting gets the same beat. Half as many greetings in the same 3.2s
+// means each one now gets half again as long to read.
+const WORD_MS = 525;
 
 const OFFSETS = GREETINGS.map((_, i) => i * WORD_MS);
 
