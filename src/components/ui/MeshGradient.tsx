@@ -35,9 +35,6 @@ uniform vec3 uColorE;
 uniform float uGrain;
 uniform float uGrainScale;
 uniform float uSeed;
-uniform float uWire;
-uniform float uWireCell;
-uniform float uWireWarp;
 
 float hash(vec2 p) {
   p = fract(p * vec2(123.34, 456.21));
@@ -114,24 +111,6 @@ void main() {
   float luma = dot(colour, vec3(0.299, 0.587, 0.114));
   colour = clamp(mix(vec3(luma), colour, 1.45), 0.0, 1.0);
 
-  // Wireframe: the mesh drawn as a lattice instead of a solid surface. The
-  // gradient is kept on the lines and the cells between them are sunk back,
-  // which is what makes the grid read as structure rather than an overlaid
-  // texture.
-  if (uWire > 0.0) {
-    // Displaced by the same field that drives the colour, so the lattice
-    // ripples the way a real deformed mesh would. In fixed screen space the
-    // grid sits perfectly still and the card reads as a static image, however
-    // much the colour underneath is moving.
-    vec2 wireUv = gl_FragCoord.xy / uWireCell + (r - 0.5) * uWireWarp;
-    vec2 cell = fract(wireUv);
-    // Distance to the nearest grid line, in device pixels.
-    vec2 edge = min(cell, 1.0 - cell) * uWireCell;
-    float line = 1.0 - smoothstep(0.5, 1.5, min(edge.x, edge.y));
-    vec3 wired = mix(colour * 0.32, colour * 1.12, line);
-    colour = mix(colour, wired, uWire);
-  }
-
   // Film grain. Quantised to a cell a couple of device pixels across, so it
   // stays visible instead of dissolving into the pixel grid on a retina
   // screen, and stepped at ~20fps rather than every frame — continuous noise
@@ -178,12 +157,6 @@ export type MeshGradientProps = {
   grainScale?: number;
   /** Shifts this instance into a different part of the noise field. */
   seed?: number;
-  /** 0 draws a solid surface; 1 draws the mesh as a lattice. */
-  wireframe?: number;
-  /** Grid spacing in CSS pixels, scaled by DPR. */
-  wireCell?: number;
-  /** How far the flow field displaces the lattice, in cells. */
-  wireWarp?: number;
   className?: string;
 };
 
@@ -194,9 +167,6 @@ export default function MeshGradient({
   grain = 0.13,
   grainScale = 1,
   seed = 0,
-  wireframe = 0,
-  wireCell = 7,
-  wireWarp = 1.5,
   className = "",
 }: MeshGradientProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -261,10 +231,7 @@ export default function MeshGradient({
     gl.uniform3fv(u("uColorE"), stopAt(4));
     gl.uniform1f(u("uGrain"), grain);
     gl.uniform1f(u("uSeed"), seed);
-    gl.uniform1f(u("uWire"), wireframe);
-    gl.uniform1f(u("uWireWarp"), wireWarp);
     const uGrainScale = u("uGrainScale");
-    const uWireCell = u("uWireCell");
 
     const resize = () => {
       // Capped: this is a decorative surface, not worth 3x pixels on a phone.
@@ -281,7 +248,6 @@ export default function MeshGradient({
       // has to be re-expressed in device pixels whenever the DPR changes —
       // dragging the window to a second monitor, for instance.
       gl.uniform1f(uGrainScale, grainScale * dpr);
-      gl.uniform1f(uWireCell, wireCell * dpr);
     };
 
     const observer = new ResizeObserver(resize);
@@ -340,9 +306,6 @@ export default function MeshGradient({
     grain,
     grainScale,
     seed,
-    wireframe,
-    wireCell,
-    wireWarp,
   ]);
 
   return (

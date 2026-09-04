@@ -1,10 +1,7 @@
 "use client";
 
 import MeshGradient from "@/components/ui/MeshGradient";
-import {
-  GRADIENT_PRESETS,
-  type GradientPreset,
-} from "@/components/ui/gradientPresets";
+import { AURORA } from "@/components/ui/gradientPresets";
 
 type System = {
   domain: string;
@@ -24,24 +21,15 @@ const SYSTEMS: System[] = [
   { domain: "Orders", name: "PrimeOMS", status: "building", seed: 12.2 },
 ];
 
-function Card({
-  system,
-  preset,
-}: {
-  system: System;
-  preset: GradientPreset;
-}) {
+function Card({ system }: { system: System }) {
   return (
     <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
       <MeshGradient
         className="absolute inset-0"
-        colors={preset.colors}
-        background={preset.background}
-        grain={preset.grain}
-        speed={preset.speed}
-        wireframe={preset.wireframe ?? 0}
-        wireCell={preset.wireCell ?? 7}
-        wireWarp={preset.wireWarp ?? 1.5}
+        colors={AURORA.colors}
+        background={AURORA.background}
+        grain={AURORA.grain}
+        speed={AURORA.speed}
         seed={system.seed}
       />
       {/* Anchors the type against whatever the gradient is doing behind it. */}
@@ -74,28 +62,16 @@ function Card({
 }
 
 export default function SystemCards() {
-  // One preset per card, paired by position — no palette is ever reused, so
-  // every card is a different gradient. The grid is therefore as long as the
-  // preset list: adding a config to gradientPresets.ts adds the next card.
-  const cards = GRADIENT_PRESETS.slice(0, SYSTEMS.length).map(
-    (preset, i) => ({ preset, system: SYSTEMS[i] })
-  );
-
-  const columns = cards.length < 3 ? cards.length : 3;
-
   return (
-    <div
-      className="grid gap-3"
-      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
-    >
-      {cards.map(({ system, preset }, i) => (
+    <div className="grid grid-cols-3 gap-3">
+      {SYSTEMS.map((system, i) => (
         <div
           key={system.name}
           // Middle column dropped, so the grid reads as a scatter of cards
           // rather than a table.
-          className={columns === 3 && i % 3 === 1 ? "translate-y-5" : ""}
+          className={i % 3 === 1 ? "translate-y-5" : ""}
         >
-          <Card system={system} preset={preset} />
+          <Card system={system} />
         </div>
       ))}
     </div>
