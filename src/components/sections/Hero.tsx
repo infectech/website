@@ -16,34 +16,24 @@ export default function Hero() {
       <HeroCanvas />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-4 pb-20">
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: EASE_OUT }}
-          className="text-xs font-medium uppercase tracking-[0.18em] text-text-secondary mb-6"
-        >
-          Software Engineering Studio
-        </motion.p>
-
-
+        {/* The studio's own line, from the brand deck. The eyebrow that used
+            to sit above it only repeated these words back. */}
         <motion.h1
           initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: EASE_OUT }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
           className="display-xl text-5xl sm:text-7xl lg:text-[5.5rem] text-ink mb-6"
         >
-          Engineering intelligent software for modern businesses.
+          Engineering intelligent software.
         </motion.h1>
 
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: EASE_OUT }}
-          className="text-lg text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed"
+          transition={{ duration: 0.5, delay: 0.1, ease: EASE_OUT }}
+          className="text-lg text-text-secondary max-w-xl mx-auto mb-10 leading-relaxed"
         >
-          We design and build AI platforms, commerce infrastructure, and
-          enterprise software, from first architecture decision to
-          production traffic.
+          AI platforms, commerce infrastructure, and enterprise systems.
         </motion.p>
 
         <motion.div
