@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
-
-const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 const GREETINGS = [
   "Hello",
@@ -23,9 +21,10 @@ const WORD_MS = 350;
 
 const OFFSETS = GREETINGS.map((_, i) => i * WORD_MS);
 
-// The per-word fade has to finish inside WORD_MS, otherwise a greeting is
+// Greetings cross-dissolve into each other: the outgoing and incoming words
+// overlap for this long. Has to stay inside WORD_MS, otherwise a greeting is
 // swapped out mid-fade and the sequence reads as a flicker instead of words.
-const FADE_S = 0.16;
+const CROSSFADE_S = 0.26;
 
 // The whole intro, entrance through exit. Rather than ending on a beat of
 // stillness and then dismissing, the overlay starts dissolving partway
@@ -87,15 +86,22 @@ export default function GreetingIntro() {
       aria-hidden="true"
     >
       <div className="relative flex flex-col items-center">
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: FADE_S, ease: EASE_OUT }}
-          className="display-lg text-5xl sm:text-7xl text-ink"
-        >
-          {GREETINGS[index]}
-        </motion.span>
+        {/* Fixed height, absolutely-placed words: they overlap as they
+            cross-dissolve, and nothing below shifts as the width changes. */}
+        <div className="relative flex items-center justify-center h-16 sm:h-24 w-full">
+          <AnimatePresence>
+            <motion.span
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: CROSSFADE_S, ease: "easeInOut" }}
+              className="absolute display-lg text-5xl sm:text-7xl text-ink whitespace-nowrap"
+            >
+              {GREETINGS[index]}
+            </motion.span>
+          </AnimatePresence>
+        </div>
 
         {/* Progress rule fills as the greetings advance. */}
         <div className="mt-8 h-px w-40 bg-border overflow-hidden">
