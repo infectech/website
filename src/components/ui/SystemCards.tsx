@@ -1,7 +1,10 @@
 "use client";
 
 import MeshGradient from "@/components/ui/MeshGradient";
-import { GRADIENT_PRESETS } from "@/components/ui/gradientPresets";
+import {
+  GRADIENT_PRESETS,
+  type GradientPreset,
+} from "@/components/ui/gradientPresets";
 
 type System = {
   domain: string;
@@ -21,11 +24,13 @@ const SYSTEMS: System[] = [
   { domain: "Orders", name: "PrimeOMS", status: "building", seed: 12.2 },
 ];
 
-function Card({ system, index }: { system: System; index: number }) {
-  // Cycled rather than fixed per card, so adding a preset reshuffles the grid
-  // without touching this list.
-  const preset = GRADIENT_PRESETS[index % GRADIENT_PRESETS.length];
-
+function Card({
+  system,
+  preset,
+}: {
+  system: System;
+  preset: GradientPreset;
+}) {
   return (
     <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
       <MeshGradient
@@ -66,16 +71,28 @@ function Card({ system, index }: { system: System; index: number }) {
 }
 
 export default function SystemCards() {
+  // One preset per card, paired by position — no palette is ever reused, so
+  // every card is a different gradient. The grid is therefore as long as the
+  // preset list: adding a config to gradientPresets.ts adds the next card.
+  const cards = GRADIENT_PRESETS.slice(0, SYSTEMS.length).map(
+    (preset, i) => ({ preset, system: SYSTEMS[i] })
+  );
+
+  const columns = cards.length < 3 ? cards.length : 3;
+
   return (
-    <div className="grid grid-cols-3 gap-3">
-      {SYSTEMS.map((system, i) => (
+    <div
+      className="grid gap-3"
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+    >
+      {cards.map(({ system, preset }, i) => (
         <div
           key={system.name}
           // Middle column dropped, so the grid reads as a scatter of cards
           // rather than a table.
-          className={i % 3 === 1 ? "translate-y-5" : ""}
+          className={columns === 3 && i % 3 === 1 ? "translate-y-5" : ""}
         >
-          <Card system={system} index={i} />
+          <Card system={system} preset={preset} />
         </div>
       ))}
     </div>
