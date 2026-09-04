@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import GreetingIntro from "@/components/ui/GreetingIntro";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -64,6 +65,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-bg-primary text-text-primary"
       >
+        <GreetingIntro />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
