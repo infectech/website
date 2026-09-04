@@ -94,7 +94,7 @@ export default function NodeDiagram({ className = "" }: { className?: string }) 
         const cycle = 5 + (i % 3);
         const progress = ((elapsed + i * 0.37) % cycle) / cycle;
         const pulse = Math.max(0, Math.sin(progress * Math.PI));
-        ctx.strokeStyle = `rgba(59, 130, 246, ${0.06 + pulse * 0.12})`;
+        ctx.strokeStyle = `rgba(10, 10, 10, ${0.05 + pulse * 0.09})`;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -106,7 +106,7 @@ export default function NodeDiagram({ className = "" }: { className?: string }) 
         const progress = ((elapsed + n.phase * cycle) % cycle) / cycle;
         const pulse = Math.max(0, Math.sin(progress * Math.PI));
         ctx.beginPath();
-        ctx.fillStyle = `rgba(96, 165, 250, ${0.25 + pulse * 0.45})`;
+        ctx.fillStyle = `rgba(10, 10, 10, ${0.12 + pulse * 0.28})`;
         ctx.arc(n.x, n.y, n.r + pulse * 1.5, 0, Math.PI * 2);
         ctx.fill();
       });

@@ -63,7 +63,7 @@ export default function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl sm:text-5xl font-semibold text-white max-w-2xl mb-4"
+          className="display-lg text-4xl sm:text-6xl text-ink max-w-2xl mb-4"
         >
           Technology we run on
         </motion.h2>
@@ -81,7 +81,7 @@ export default function TechStack() {
               onBlur={() => setActive(null)}
               className={`px-4 py-2 rounded-lg text-sm font-mono transition-all duration-200 ease-out border active:scale-95 ${
                 active === cat
-                  ? "border-brand text-white bg-brand/10"
+                  ? "border-ink text-white bg-ink"
                   : "border-border text-text-secondary hover:border-border-hover"
               }`}
             >
@@ -112,8 +112,8 @@ export default function TechStack() {
                       key={tech}
                       className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors duration-200 ${
                         active === category
-                          ? "bg-brand/15 text-brand-hover"
-                          : "bg-white/5 text-text-secondary"
+                          ? "bg-ink text-white"
+                          : "bg-bg-muted text-text-secondary"
                       }`}
                     >
                       {tech}

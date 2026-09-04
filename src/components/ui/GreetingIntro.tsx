@@ -19,9 +19,9 @@ const GREETINGS = [
 
 // The per-word fade must finish well inside WORD_MS, otherwise each greeting is
 // swapped out mid-fade and the whole intro reads as a flicker instead of words.
-const WORD_MS = 150;
-const FADE_S = 0.09;
-const HOLD_MS = 300;
+const WORD_MS = 420;
+const FADE_S = 0.28;
+const HOLD_MS = 550;
 
 export default function GreetingIntro() {
   const reduce = useSafeReducedMotion();
@@ -63,23 +63,34 @@ export default function GreetingIntro() {
         <motion.div
           key="greeting-intro"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: EASE_OUT }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-bg-primary"
+          transition={{ duration: 0.6, ease: EASE_OUT }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary"
           aria-hidden="true"
         >
-          <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-brand/10 blur-[120px] pointer-events-none" />
-
-          <div className="relative flex items-center gap-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+          <div className="relative flex flex-col items-center">
             <motion.span
               key={index}
-              initial={{ opacity: 0, y: 6 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: FADE_S, ease: EASE_OUT }}
-              className="font-display text-4xl sm:text-5xl font-semibold tracking-[-0.02em] text-white"
+              className="display-lg text-5xl sm:text-7xl text-ink"
             >
               {GREETINGS[index]}
             </motion.span>
+
+            {/* Progress rule fills as the greetings advance. */}
+            <div className="mt-8 h-px w-40 bg-border overflow-hidden">
+              <motion.div
+                className="h-full bg-accent"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{
+                  duration: (GREETINGS.length * WORD_MS + HOLD_MS) / 1000,
+                  ease: "linear",
+                }}
+                style={{ originX: 0 }}
+              />
+            </div>
           </div>
         </motion.div>
       )}

@@ -1,25 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg-primary: #030712;
-  --color-bg-surface: #0b1220;
-  --color-brand: #3b82f6;
-  --color-brand-hover: #60a5fa;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #94a3b8;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.16);
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
+  /* Light, paper-like ground with pure-white cards sitting on top of it. */
+  --color-bg-primary: #fafafa;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #f2f2f2;
+
+  /* Near-black is the primary "brand" mark: buttons, headlines, icons. */
+  --color-ink: #0a0a0a;
+  --color-brand: #0a0a0a;
+  --color-brand-hover: #262626;
+
+  /* Indigo is an accent only — underlines, active dots, small marks. */
+  --color-accent: #4f46e5;
+  --color-accent-soft: #eef2ff;
+
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #8a8a94;
+
+  --color-border: rgba(10, 10, 10, 0.1);
+  --color-border-hover: rgba(10, 10, 10, 0.24);
+
+  --color-success: #16a34a;
+  --color-warning: #d97706;
 }
 
 @theme inline {
   --color-bg-primary: var(--color-bg-primary);
   --color-bg-surface: var(--color-bg-surface);
+  --color-bg-muted: var(--color-bg-muted);
+  --color-ink: var(--color-ink);
   --color-brand: var(--color-brand);
   --color-brand-hover: var(--color-brand-hover);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
   --color-text-primary: var(--color-text-primary);
   --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
   --color-border: var(--color-border);
   --color-border-hover: var(--color-border-hover);
   --color-success: var(--color-success);
@@ -31,7 +49,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -40,15 +58,55 @@ body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
-.gradient-brand {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+/* Oversized, tightly-tracked display headline — the loudest element on a page. */
+.display-xl {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
 }
 
-.gradient-text-brand {
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.display-lg {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+
+/* Hairline-bordered white card, flat by default, lifting only on hover. */
+.card-flat {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition:
+    border-color 150ms ease-out,
+    transform 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+.card-flat:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 10, 10, 0.06);
+}
+
+/* The small indigo rule that sits under a wordmark or eyebrow. */
+.accent-rule::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 2px;
+  margin-top: 0.75rem;
+  background: var(--color-accent);
+}
+
+/* Dashed connector used between flow nodes in the brand illustrations. */
+.dashed-rule {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-border-hover) 0 4px,
+    transparent 4px 10px
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -50,7 +50,7 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl sm:text-5xl font-semibold text-white mb-16 text-center"
+          className="display-lg text-4xl sm:text-6xl text-ink mb-16 text-center"
         >
           Frequently asked
         </motion.h2>
@@ -65,7 +65,7 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                   className="group w-full flex items-center justify-between gap-4 py-6 text-left"
                 >
-                  <span className="font-medium text-white transition-colors duration-200 group-hover:text-brand-hover">
+                  <span className="font-medium text-ink transition-colors duration-200 group-hover:text-brand-hover">
                     {faq.question}
                   </span>
                   <Plus

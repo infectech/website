@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl sm:text-5xl font-semibold text-white max-w-2xl mb-16"
+          className="display-lg text-4xl sm:text-6xl text-ink max-w-2xl mb-16"
         >
           Why Infectech
         </motion.h2>
@@ -57,10 +57,10 @@ export default function WhyChooseUs() {
                 transition={{ duration: 0.4, delay: (i % 5) * 0.06, ease: [0.23, 1, 0.32, 1] }}
               >
                 <TiltCard className="p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300 h-full">
-                  <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center mb-4">
                     <Icon size={18} strokeWidth={1.75} className="text-brand" />
                   </div>
-                  <h3 className="font-semibold text-white mb-1.5 text-sm">{r.title}</h3>
+                  <h3 className="font-semibold text-ink mb-1.5 text-sm">{r.title}</h3>
                   <p className="text-sm text-text-secondary leading-relaxed">{r.description}</p>
                 </TiltCard>
               </motion.div>

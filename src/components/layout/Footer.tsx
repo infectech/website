@@ -63,8 +63,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-14">
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
-              <Image src="/images/logo white.png" alt="Infectech" width={32} height={32} />
-              <span className="font-display text-xl font-semibold text-white">
+              <Image src="/images/logo black.png" alt="Infectech" width={32} height={32} />
+              <span className="font-display text-xl font-bold tracking-[-0.03em] text-ink">
                 Infectech
               </span>
             </Link>
@@ -76,7 +76,7 @@ export default function Footer() {
             <div className="flex flex-col items-start gap-2 mb-6">
               <a
                 href="mailto:infectech.official@gmail.com"
-                className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-ink hover:text-accent transition-colors"
               >
                 <Mail size={14} />
                 infectech.official@gmail.com
@@ -85,7 +85,7 @@ export default function Footer() {
                 href="https://wa.me/8801326561196"
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-2 text-sm text-brand hover:text-brand-hover transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-ink hover:text-accent transition-colors"
               >
                 <Phone size={14} />
                 +880 1326-561196
@@ -104,11 +104,11 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
-                  className="flex-1 min-w-0 rounded-lg bg-white/5 border border-border px-3 py-2 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="flex-1 min-w-0 rounded-lg bg-bg-primary border border-border px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10"
                 />
                 <button
                   type="submit"
-                  className="shrink-0 px-4 py-2 rounded-lg gradient-brand text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.96] active:translate-y-0"
+                  className="shrink-0 px-4 py-2 rounded-lg bg-ink text-white text-sm font-semibold transition-all duration-150 ease-out hover:bg-brand-hover hover:-translate-y-0.5 active:scale-[0.96] active:translate-y-0"
                 >
                   Subscribe
                 </button>
@@ -163,7 +163,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={s.label}
-                className="text-text-secondary hover:text-brand hover:-translate-y-0.5 active:scale-90 transition-all duration-200 ease-out"
+                className="text-text-secondary hover:text-ink hover:-translate-y-0.5 active:scale-90 transition-all duration-200 ease-out"
               >
                 <s.icon size={16} />
               </a>

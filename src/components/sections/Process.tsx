@@ -19,14 +19,14 @@ export default function Process() {
   const reduce = useSafeReducedMotion();
 
   return (
-    <section className="py-24 sm:py-32 bg-bg-primary text-white overflow-hidden">
+    <section className="py-24 sm:py-32 bg-bg-primary text-ink overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl sm:text-5xl font-semibold text-white max-w-2xl mb-20"
+          className="display-lg text-4xl sm:text-6xl text-ink max-w-2xl mb-20"
         >
           How a project moves
         </motion.h2>
@@ -44,12 +44,12 @@ export default function Process() {
                 transition={{ duration: 0.4, delay: (i % 4) * 0.08 }}
                 className="relative"
               >
-                <div className="relative z-10 w-16 h-16 rounded-2xl bg-brand/10 border border-brand/30 flex items-center justify-center mb-4">
+                <div className="relative z-10 w-16 h-16 rounded-2xl bg-bg-surface border border-border flex items-center justify-center mb-4">
                   <span className="font-mono text-sm text-brand-hover">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="font-semibold text-white mb-1.5">{step.title}</h3>
+                <h3 className="font-semibold text-ink mb-1.5">{step.title}</h3>
                 <p className="text-xs font-mono text-text-secondary/80 mb-2">{step.duration}</p>
                 <p className="text-sm text-text-secondary leading-relaxed">{step.description}</p>
               </motion.div>

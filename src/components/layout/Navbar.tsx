@@ -38,21 +38,21 @@ export default function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out ${
         scrolled
-          ? "bg-[rgba(11,18,32,0.7)] backdrop-blur-xl border-b border-border"
+          ? "bg-[rgba(250,250,250,0.82)] backdrop-blur-xl border-b border-border"
           : "bg-transparent border-b border-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
           <Image
-            src="/images/logo white.png"
+            src="/images/logo black.png"
             alt="Infectech"
             width={28}
             height={28}
             priority
             className="transition-transform duration-200 ease-out group-hover:-translate-y-px"
           />
-          <span className="font-display text-lg font-semibold tracking-tight text-white transition-transform duration-200 ease-out group-hover:-translate-y-px inline-block">
+          <span className="font-display text-lg font-bold tracking-[-0.03em] text-ink transition-transform duration-200 ease-out group-hover:-translate-y-px inline-block">
             Infectech
           </span>
         </Link>
@@ -65,12 +65,12 @@ export default function Navbar() {
                 <Link
                   href={l.href}
                   className={`group relative text-sm font-medium transition-colors duration-200 ${
-                    active ? "text-white" : "text-text-secondary hover:text-white"
+                    active ? "text-ink" : "text-text-secondary hover:text-ink"
                   }`}
                 >
                   {l.label}
                   <span
-                    className={`absolute -bottom-1.5 left-0 h-px bg-brand transition-all duration-300 ease-out ${
+                    className={`absolute -bottom-1.5 left-0 h-0.5 bg-accent transition-all duration-300 ease-out ${
                       active ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -83,14 +83,14 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <Link
             href="/contact"
-            className="px-5 py-2 rounded-full text-sm font-semibold gradient-brand text-white transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.96] active:translate-y-0"
+            className="px-5 py-2 rounded-full text-sm font-semibold bg-ink text-white hover:bg-brand-hover transition-all duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.96] active:translate-y-0"
           >
             Start Your Project
           </Link>
         </div>
 
         <button
-          className="lg:hidden p-2 rounded-lg text-slate-300 transition-transform duration-150 ease-out active:scale-90"
+          className="lg:hidden p-2 rounded-lg text-ink transition-transform duration-150 ease-out active:scale-90"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -129,7 +129,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={l.href}
-                    className="block py-2.5 px-3 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5 active:scale-[0.98] transition-all duration-150"
+                    className="block py-2.5 px-3 rounded-lg text-sm font-medium text-text-secondary hover:bg-bg-muted hover:text-ink active:scale-[0.98] transition-all duration-150"
                   >
                     {l.label}
                   </Link>
@@ -143,7 +143,7 @@ export default function Navbar() {
               >
                 <Link
                   href="/contact"
-                  className="block w-full text-center py-2.5 rounded-full text-sm font-semibold gradient-brand text-white active:scale-[0.97] transition-transform duration-150"
+                  className="block w-full text-center py-2.5 rounded-full text-sm font-semibold bg-ink text-white active:scale-[0.97] transition-transform duration-150"
                 >
                   Start Your Project
                 </Link>

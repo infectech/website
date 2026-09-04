@@ -99,7 +99,7 @@ export default function ServicesPage() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-20"
         >
-          <h1 className="font-display text-4xl sm:text-5xl font-semibold text-white mb-6">
+          <h1 className="display-lg text-4xl sm:text-6xl text-ink mb-6">
             Services
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
@@ -119,13 +119,13 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start p-8 rounded-2xl border border-border scroll-mt-24"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start p-8 rounded-2xl border border-border bg-bg-surface scroll-mt-24"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-brand/10 flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-xl bg-bg-primary border border-border flex items-center justify-center mb-5">
                     <Icon size={22} className="text-brand" strokeWidth={1.75} />
                   </div>
-                  <h2 className="text-2xl font-semibold text-white mb-3">{s.title}</h2>
+                  <h2 className="text-2xl font-semibold text-ink mb-3">{s.title}</h2>
                   <p className="text-text-secondary leading-relaxed mb-5">{s.description}</p>
                   <Link
                     href="/contact"
@@ -142,7 +142,7 @@ export default function ServicesPage() {
                     {s.items.map((item) => (
                       <span
                         key={item}
-                        className="px-3 py-2 rounded-xl text-sm font-medium bg-white/5 text-text-secondary"
+                        className="px-3 py-2 rounded-xl text-sm font-medium bg-bg-muted text-text-secondary"
                       >
                         {item}
                       </span>
@@ -159,17 +159,17 @@ export default function ServicesPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="mt-16 text-center p-12 rounded-3xl gradient-brand"
+          className="mt-16 text-center p-12 sm:p-16 rounded-3xl bg-ink"
         >
-          <h2 className="text-3xl font-semibold text-white mb-4">
+          <h2 className="display-lg text-3xl sm:text-5xl text-white mb-4">
             Ready to get started?
           </h2>
-          <p className="text-white/80 mb-8 text-lg max-w-lg mx-auto">
+          <p className="text-white/70 mb-8 text-lg max-w-lg mx-auto">
             Let&apos;s discuss your project and find the right approach.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-brand font-semibold hover:-translate-y-0.5 transition-transform"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-ink font-semibold hover:-translate-y-0.5 transition-transform"
           >
             Start Your Project <ArrowRight size={16} />
           </Link>

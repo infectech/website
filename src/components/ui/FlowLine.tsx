@@ -66,10 +66,10 @@ export default function FlowLine({ className = "" }: { className?: string }) {
         />
         <defs>
           <linearGradient id="flow-gradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#3B82F6" stopOpacity="0" />
-            <stop offset="15%" stopColor="#3B82F6" stopOpacity="1" />
-            <stop offset="85%" stopColor="#60A5FA" stopOpacity="1" />
-            <stop offset="100%" stopColor="#60A5FA" stopOpacity="0" />
+            <stop offset="0%" stopColor="#0A0A0A" stopOpacity="0" />
+            <stop offset="15%" stopColor="#0A0A0A" stopOpacity="0.28" />
+            <stop offset="85%" stopColor="#0A0A0A" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#0A0A0A" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

@@ -45,8 +45,10 @@ export default function TiltCard({
   const springX = useSpring(mouseX, SPRING);
   const springY = useSpring(mouseY, SPRING);
 
-  const rotateX = useTransform(springY, [0, 1], [7, -7]);
-  const rotateY = useTransform(springX, [0, 1], [-7, 7]);
+  // Kept deliberately shallow: the flat, editorial card style reads as broken
+  // if it swings around like a 3D object.
+  const rotateX = useTransform(springY, [0, 1], [3, -3]);
+  const rotateY = useTransform(springX, [0, 1], [-3, 3]);
   const glareX = useTransform(springX, [0, 1], ["0%", "100%"]);
   const glareY = useTransform(springY, [0, 1], ["0%", "100%"]);
 
@@ -67,7 +69,7 @@ export default function TiltCard({
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       style={{
-        background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(96,165,250,0.15), transparent 60%)`,
+        background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(10,10,10,0.045), transparent 60%)`,
       }}
     />
   );
@@ -87,7 +89,7 @@ export default function TiltCard({
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
     style: sharedStyle,
-    whileHover: reduce ? undefined : { scale: 1.02 },
+    whileHover: reduce ? undefined : { scale: 1.01 },
     whileTap: { scale: 0.98 },
     transition: { type: "spring" as const, stiffness: 300, damping: 24 },
     className: `relative [transform:translateZ(0)] ${className}`,

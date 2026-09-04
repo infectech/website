@@ -93,7 +93,7 @@ export default function ServicesGrid() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-white">
+          <h2 className="display-lg text-4xl sm:text-6xl text-ink">
             What we do
           </h2>
         </motion.div>
@@ -114,10 +114,10 @@ export default function ServicesGrid() {
                   href={s.href}
                   className="group flex flex-col h-full p-8 rounded-2xl border border-border bg-bg-surface hover:border-border-hover transition-colors duration-300"
                 >
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 bg-brand/10 text-brand">
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 bg-bg-primary border border-border text-ink">
                     <Icon size={20} strokeWidth={1.75} />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{s.title}</h3>
+                  <h3 className="text-lg font-semibold text-ink mb-2">{s.title}</h3>
                   <p className="text-sm text-text-secondary leading-relaxed mb-5 flex-1">
                     {s.description}
                   </p>

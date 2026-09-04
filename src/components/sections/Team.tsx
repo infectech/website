@@ -43,7 +43,7 @@ export default function Team() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-white max-w-2xl mb-4">
+          <h2 className="display-lg text-4xl sm:text-6xl text-ink max-w-2xl mb-4">
             The team
           </h2>
           <p className="text-text-secondary max-w-xl">
@@ -70,7 +70,7 @@ export default function Team() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="font-semibold text-white mb-0.5">{member.name}</h3>
+                <h3 className="font-semibold text-ink mb-0.5">{member.name}</h3>
                 <p className="text-sm text-brand mb-2">{member.role}</p>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">
                   {member.specialty}

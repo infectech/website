@@ -60,7 +60,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="font-display text-4xl sm:text-5xl font-semibold text-white mb-6 leading-tight">
+            <h1 className="display-lg text-4xl sm:text-6xl text-ink mb-6 leading-tight">
               Let&apos;s build something extraordinary.
             </h1>
             <p className="text-lg text-text-secondary leading-relaxed mb-10">
@@ -70,7 +70,7 @@ export default function ContactPage() {
 
             <div className="space-y-5">
               <div className="flex gap-4 p-5 rounded-xl border border-border">
-                <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center shrink-0">
                   <Mail size={18} className="text-brand" />
                 </div>
                 <div>
@@ -79,14 +79,14 @@ export default function ContactPage() {
                   </div>
                   <a
                     href="mailto:infectech.official@gmail.com"
-                    className="text-sm font-semibold text-white hover:text-brand-hover transition-colors"
+                    className="text-sm font-semibold text-ink hover:text-brand-hover transition-colors"
                   >
                     infectech.official@gmail.com
                   </a>
                 </div>
               </div>
               <div className="flex gap-4 p-5 rounded-xl border border-border">
-                <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center shrink-0">
                   <Phone size={18} className="text-brand" />
                 </div>
                 <div>
@@ -97,21 +97,21 @@ export default function ContactPage() {
                     href="https://wa.me/8801326561196"
                     target="_blank"
                     rel="noopener"
-                    className="text-sm font-semibold text-white hover:text-brand-hover transition-colors"
+                    className="text-sm font-semibold text-ink hover:text-brand-hover transition-colors"
                   >
                     +880 1326-561196
                   </a>
                 </div>
               </div>
               <div className="flex gap-4 p-5 rounded-xl border border-border">
-                <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center shrink-0">
                   <Clock size={18} className="text-brand" />
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-0.5">
                     Response time
                   </div>
-                  <div className="text-sm font-semibold text-white">Within one business day</div>
+                  <div className="text-sm font-semibold text-ink">Within one business day</div>
                 </div>
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function ContactPage() {
                   <div className="w-14 h-14 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4">
                     <Check size={24} className="text-success" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Got it.</h3>
+                  <h3 className="text-xl font-semibold text-ink mb-2">Got it.</h3>
                   <p className="text-text-secondary">
                     We&apos;ll reply within one business day.
                   </p>
@@ -138,7 +138,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="p-8 rounded-2xl border border-border space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="name" className="block text-sm font-medium text-ink mb-2">
                       Name
                     </label>
                     <input
@@ -146,25 +146,25 @@ export default function ContactPage() {
                       name="name"
                       type="text"
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                     />
                   </div>
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="company" className="block text-sm font-medium text-ink mb-2">
                       Company
                     </label>
                     <input
                       id="company"
                       name="company"
                       type="text"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="email" className="block text-sm font-medium text-ink mb-2">
                       Email
                     </label>
                     <input
@@ -172,24 +172,24 @@ export default function ContactPage() {
                       name="email"
                       type="email"
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="phone" className="block text-sm font-medium text-ink mb-2">
                       Phone
                     </label>
                     <input
                       id="phone"
                       name="phone"
                       type="tel"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="project-type" className="block text-sm font-medium text-white mb-2">
+                  <label htmlFor="project-type" className="block text-sm font-medium text-ink mb-2">
                     Project type
                   </label>
                   <select
@@ -197,7 +197,7 @@ export default function ContactPage() {
                     name="project_type"
                     required
                     defaultValue=""
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                   >
                     <option value="" disabled className="bg-bg-surface">
                       Select a service
@@ -212,14 +212,14 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="budget" className="block text-sm font-medium text-ink mb-2">
                       Budget range
                     </label>
                     <select
                       id="budget"
                       name="budget"
                       defaultValue=""
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                     >
                       <option value="" disabled className="bg-bg-surface">
                         Select a range
@@ -232,14 +232,14 @@ export default function ContactPage() {
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="timeline" className="block text-sm font-medium text-white mb-2">
+                    <label htmlFor="timeline" className="block text-sm font-medium text-ink mb-2">
                       Timeline
                     </label>
                     <select
                       id="timeline"
                       name="timeline"
                       defaultValue=""
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
                     >
                       <option value="" disabled className="bg-bg-surface">
                         Select a timeline
@@ -254,7 +254,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-ink mb-2">
                     Message
                   </label>
                   <textarea
@@ -262,7 +262,7 @@ export default function ContactPage() {
                     name="message"
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors resize-none"
                   />
                 </div>
 
@@ -276,7 +276,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl gradient-brand text-white font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 disabled:opacity-60 disabled:pointer-events-none"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-ink text-white font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 disabled:opacity-60 disabled:pointer-events-none"
                 >
                   {status === "submitting" ? "Sending..." : "Send Project Inquiry"}
                   <ArrowRight size={16} />

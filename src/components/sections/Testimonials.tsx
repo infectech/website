@@ -48,13 +48,13 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-3xl sm:text-4xl font-semibold text-white text-center mb-4"
+          className="display-lg text-3xl sm:text-5xl text-ink text-center mb-4"
         >
           What people say about the products we&apos;ve engineered
         </motion.h2>
 
         <div className="relative mt-14 min-h-[220px] flex items-center">
-          <Quote size={32} className="absolute -top-4 left-1/2 -translate-x-1/2 text-brand/30" aria-hidden="true" />
+          <Quote size={32} className="absolute -top-4 left-1/2 -translate-x-1/2 text-border-hover" aria-hidden="true" />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -65,7 +65,7 @@ export default function Testimonials() {
               transition={{ duration: 0.35 }}
               className="w-full text-center"
             >
-              <p className="text-xl sm:text-2xl text-white leading-snug mb-6">
+              <p className="text-xl sm:text-2xl text-ink leading-snug mb-6">
                 &ldquo;{testimonials[index].quote}&rdquo;
               </p>
               <p className="text-sm text-text-secondary">
@@ -79,7 +79,7 @@ export default function Testimonials() {
           <button
             onClick={prev}
             aria-label="Previous testimonial"
-            className="p-2 rounded-full border border-border hover:border-border-hover hover:bg-white/5 text-text-secondary hover:text-white transition-all duration-150 ease-out active:scale-90"
+            className="p-2 rounded-full border border-border hover:border-border-hover hover:bg-bg-muted text-text-secondary hover:text-ink transition-all duration-150 ease-out active:scale-90"
           >
             <ChevronLeft size={16} />
           </button>
@@ -90,7 +90,7 @@ export default function Testimonials() {
                 onClick={() => setIndex(i)}
                 aria-label={`Go to testimonial ${i + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === index ? "w-6 bg-brand" : "w-1.5 bg-border"
+                  i === index ? "w-6 bg-accent" : "w-1.5 bg-border"
                 }`}
               />
             ))}
@@ -98,7 +98,7 @@ export default function Testimonials() {
           <button
             onClick={next}
             aria-label="Next testimonial"
-            className="p-2 rounded-full border border-border hover:border-border-hover hover:bg-white/5 text-text-secondary hover:text-white transition-all duration-150 ease-out active:scale-90"
+            className="p-2 rounded-full border border-border hover:border-border-hover hover:bg-bg-muted text-text-secondary hover:text-ink transition-all duration-150 ease-out active:scale-90"
           >
             <ChevronRight size={16} />
           </button>

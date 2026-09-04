@@ -63,7 +63,7 @@ export default function AboutPage() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-20"
         >
-          <h1 className="font-display text-4xl sm:text-5xl font-semibold text-white mb-6">
+          <h1 className="display-lg text-4xl sm:text-6xl text-ink mb-6">
             About Infectech
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
@@ -86,10 +86,10 @@ export default function AboutPage() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="p-8 rounded-2xl border border-border"
               >
-                <div className="w-11 h-11 rounded-xl bg-brand/10 flex items-center justify-center mb-5">
+                <div className="w-11 h-11 rounded-xl bg-bg-primary border border-border flex items-center justify-center mb-5">
                   <Icon size={20} className="text-brand" strokeWidth={1.75} />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
+                <h3 className="text-lg font-semibold text-ink mb-3">{item.title}</h3>
                 <p className="text-sm text-text-secondary leading-relaxed">{item.content}</p>
               </motion.div>
             );
@@ -103,7 +103,7 @@ export default function AboutPage() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <h2 className="font-display text-3xl font-semibold text-white mb-3">The team</h2>
+          <h2 className="display-lg text-3xl text-ink mb-3">The team</h2>
           <p className="text-text-secondary max-w-xl">
             A lean, senior team by design. Small enough that every person here
             ships production code, not just manages it.
@@ -129,7 +129,7 @@ export default function AboutPage() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="font-semibold text-white mb-0.5">{member.name}</h3>
+                <h3 className="font-semibold text-ink mb-0.5">{member.name}</h3>
                 <p className="text-sm text-brand mb-2">{member.role}</p>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">
                   {member.specialty}

@@ -34,7 +34,7 @@ export default function Blog() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl sm:text-5xl font-semibold text-white max-w-2xl mb-16"
+          className="display-lg text-4xl sm:text-6xl text-ink max-w-2xl mb-16"
         >
           Latest writing
         </motion.h2>
@@ -54,7 +54,7 @@ export default function Blog() {
                 className="group flex flex-col h-full p-6 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
               >
                 <span className="text-xs font-mono text-brand mb-4">{post.category}</span>
-                <h3 className="font-semibold text-white mb-2 leading-snug flex-1">{post.title}</h3>
+                <h3 className="font-semibold text-ink mb-2 leading-snug flex-1">{post.title}</h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-5">{post.excerpt}</p>
                 <div className="flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-2.5 transition-all">
                   Read more <ArrowRight size={14} />

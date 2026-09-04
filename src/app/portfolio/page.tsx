@@ -79,7 +79,7 @@ export default function PortfolioPage() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-12"
         >
-          <h1 className="font-display text-4xl sm:text-5xl font-semibold text-white mb-6">
+          <h1 className="display-lg text-4xl sm:text-6xl text-ink mb-6">
             Our work
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
@@ -95,7 +95,7 @@ export default function PortfolioPage() {
               onClick={() => setFilter(f)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ease-out border active:scale-95 ${
                 filter === f
-                  ? "border-brand bg-brand/10 text-white"
+                  ? "border-ink bg-ink text-white"
                   : "border-border text-text-secondary hover:border-border-hover"
               }`}
             >
@@ -126,11 +126,11 @@ export default function PortfolioPage() {
                       <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true" />
                       Live
                     </span>
-                    <h3 className="text-xl font-semibold text-white">{p.title}</h3>
+                    <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
                   </div>
                   <ArrowUpRight
                     size={20}
-                    className="text-text-secondary group-hover:text-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+                    className="text-text-secondary group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
                   />
                 </div>
                 <p className="text-sm text-text-secondary mb-1">{p.tagline}</p>
@@ -142,7 +142,7 @@ export default function PortfolioPage() {
                   {p.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 rounded-full text-xs font-mono bg-white/5 text-text-secondary"
+                      className="px-2.5 py-1 rounded-full text-xs font-mono bg-bg-muted text-text-secondary"
                     >
                       {t}
                     </span>
@@ -167,7 +167,7 @@ export default function PortfolioPage() {
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-warning mb-4 px-3 py-1 rounded-full border border-warning/30 bg-warning/10">
                 Building now
               </span>
-              <h3 className="font-display text-3xl sm:text-4xl font-semibold text-white mb-2">
+              <h3 className="display-lg text-3xl sm:text-5xl text-ink mb-2">
                 PrimeOMS
               </h3>
               <p className="text-text-secondary mb-1">
@@ -188,7 +188,7 @@ export default function PortfolioPage() {
                 {["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"].map(
                   (node, i, arr) => (
                     <div key={node} className="flex items-center gap-3">
-                      <span className="px-4 py-2 rounded-xl border border-brand/30 bg-brand/10 text-sm font-medium text-white">
+                      <span className="px-4 py-2 rounded-xl border border-border bg-bg-surface text-sm font-medium text-ink">
                         {node}
                       </span>
                       {i < arr.length - 1 && (
@@ -205,7 +205,7 @@ export default function PortfolioPage() {
 
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl gradient-brand text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
               >
                 Get early access
               </a>

@@ -52,7 +52,7 @@ export default function Statistics() {
               transition={{ duration: 0.4, delay: i * 0.08 }}
               className="text-center sm:text-left"
             >
-              <div className="text-4xl sm:text-5xl font-semibold text-white mb-2">
+              <div className="text-4xl sm:text-5xl font-semibold text-ink mb-2">
                 <Counter value={s.value} suffix={s.suffix} />
               </div>
               <p className="text-sm text-text-secondary leading-snug">{s.label}</p>
