@@ -4,7 +4,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import HeroCanvas from "@/components/ui/HeroCanvas";
+import LiveSystemsCard from "@/components/ui/LiveSystemsCard";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -12,49 +12,50 @@ export default function Hero() {
   const reduce = useSafeReducedMotion();
 
   return (
-    <section className="relative min-h-[100dvh] flex items-center overflow-hidden bg-bg-primary pt-20">
-      <HeroCanvas />
+    <section className="relative flex min-h-[100dvh] items-center overflow-hidden bg-bg-primary pt-24 pb-16">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:px-8">
+        <div className="text-center lg:text-left">
+          <motion.h1
+            initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.6, ease: EASE_OUT }}
+            className="display-xl mb-8 text-5xl text-ink sm:text-6xl lg:text-7xl"
+          >
+            Engineering intelligent software.
+          </motion.h1>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-4 pb-20">
-        {/* The studio's own line, from the brand deck. The eyebrow that used
-            to sit above it only repeated these words back. */}
-        <motion.h1
-          initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.6, ease: EASE_OUT }}
-          className="display-xl text-5xl sm:text-7xl lg:text-[5.5rem] text-ink mb-6"
-        >
-          Engineering intelligent software.
-        </motion.h1>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASE_OUT }}
-          className="text-lg text-text-secondary max-w-xl mx-auto mb-10 leading-relaxed"
-        >
-          AI platforms, commerce infrastructure, and enterprise systems.
-        </motion.p>
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: EASE_OUT }}
+            className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start"
+          >
+            <Link
+              href="/contact"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-3.5 font-semibold text-white transition-all duration-150 ease-out hover:-translate-y-0.5 hover:bg-brand-hover active:translate-y-0 active:scale-[0.97]"
+            >
+              Start Your Project
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+              />
+            </Link>
+            <Link
+              href="#featured-projects"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-bg-surface px-8 py-3.5 font-semibold text-text-primary transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-border-hover active:translate-y-0 active:scale-[0.97]"
+            >
+              View Our Work
+            </Link>
+          </motion.div>
+        </div>
 
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 16 }}
+          initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3, ease: EASE_OUT }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-6"
+          transition={{ duration: 0.7, delay: 0.2, ease: EASE_OUT }}
+          className="mx-auto w-full max-w-sm lg:max-w-none"
         >
-          <Link
-            href="/contact"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-ink text-white font-semibold transition-all duration-150 ease-out hover:bg-brand-hover hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
-          >
-            Start Your Project
-            <ArrowRight size={16} className="transition-transform duration-200 ease-out group-hover:translate-x-1" />
-          </Link>
-          <Link
-            href="#featured-projects"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border border-border bg-bg-surface text-text-primary font-semibold hover:border-border-hover transition-all duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
-          >
-            View Our Work
-          </Link>
+          <LiveSystemsCard />
         </motion.div>
       </div>
     </section>
