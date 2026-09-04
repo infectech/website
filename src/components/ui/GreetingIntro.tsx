@@ -24,7 +24,6 @@ const GREETINGS = [
 const FIRST_MS = 620;
 const DECAY = 0.72;
 const MIN_MS = 130;
-const HOLD_MS = 320;
 
 const SLOTS = GREETINGS.map((_, i) =>
   Math.max(MIN_MS, Math.round(FIRST_MS * DECAY ** i))
@@ -36,7 +35,12 @@ const OFFSETS = SLOTS.reduce<number[]>(
   []
 );
 
-const TOTAL_MS = SLOTS.reduce((a, b) => a + b, 0) + HOLD_MS;
+// The whole intro, entrance through exit. The exit is a long, overlapping
+// fade rather than a beat of stillness followed by a dismissal: the last
+// greeting is still on screen, fading with the overlay, for EXIT_MS.
+const TOTAL_MS = 3200;
+const EXIT_MS = 900;
+const DISMISS_AT_MS = TOTAL_MS - EXIT_MS;
 
 // The fade must finish well inside its own slot, otherwise the greeting is
 // swapped out mid-fade and the intro reads as a flicker instead of words.
@@ -57,7 +61,7 @@ export default function GreetingIntro() {
     const timers = GREETINGS.map((_, i) =>
       window.setTimeout(() => setIndex(i), OFFSETS[i])
     );
-    timers.push(window.setTimeout(() => setDone(true), TOTAL_MS));
+    timers.push(window.setTimeout(() => setDone(true), DISMISS_AT_MS));
 
     return () => timers.forEach(window.clearTimeout);
   }, [reduce]);
@@ -77,8 +81,11 @@ export default function GreetingIntro() {
         <motion.div
           key="greeting-intro"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: EASE_OUT }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary"
+          // easeInOut, not the sharp EASE_OUT used elsewhere: that curve spends
+          // three quarters of the fade in its first 250ms, which reads as a cut
+          // rather than the last greeting dissolving with the overlay.
+          transition={{ duration: EXIT_MS / 1000, ease: "easeInOut" }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-primary pointer-events-none"
           aria-hidden="true"
         >
           <div className="relative flex flex-col items-center">
@@ -98,7 +105,7 @@ export default function GreetingIntro() {
                 className="h-full bg-accent"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: TOTAL_MS / 1000, ease: "linear" }}
+                transition={{ duration: DISMISS_AT_MS / 1000, ease: "linear" }}
                 style={{ originX: 0 }}
               />
             </div>
