@@ -48,6 +48,17 @@ export const metadata: Metadata = {
     description:
       "AI platforms, commerce infrastructure, and enterprise software, from first architecture decision to production traffic.",
     type: "website",
+    // Without these, scrapers that find no og:url/og:site_name fall back to
+    // guessing, and the card is attributed to whatever they infer.
+    url: "/",
+    siteName: "Infectech",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Infectech — Engineering Intelligent Digital Products",
+    description:
+      "AI platforms, commerce infrastructure, and enterprise software, from first architecture decision to production traffic.",
   },
 };
 
