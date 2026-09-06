@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://infectech.dev"),
+  metadataBase: new URL("https://infec.tech"),
   title: {
     default: "Infectech — Engineering Intelligent Digital Products",
     template: "%s — Infectech",
