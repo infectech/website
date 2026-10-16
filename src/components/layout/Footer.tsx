@@ -22,10 +22,10 @@ const columns = {
   Products: [
     { href: "https://aihr.daffodilglobal.ai", label: "AIHR", external: true },
     { href: "https://fc.daffodilglobal.ai", label: "Daffodil F-Commerce OS", external: true },
-    { href: "https://app.152.70.130.154.nip.io/", label: "Barighor", external: true },
+    { href: "https://barighor.infec.tech/", label: "Barighor", external: true },
     { href: "https://grameenpestbd.com", label: "Grameen Pest Control", external: true },
     { href: "https://sonic-cyan.vercel.app", label: "Sonic", external: true },
-    { href: "/#primeoms", label: "PrimeOMS (in progress)" },
+    { href: "https://primeoms.infec.tech", label: "PrimeOMS (in progress)", external: true },
   ],
   Resources: [
     { href: "/#blog", label: "Blog" },

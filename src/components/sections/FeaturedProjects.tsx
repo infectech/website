@@ -52,7 +52,7 @@ const projects: Project[] = [
     description:
       "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history, built bilingually for the Bangladesh market.",
     tech: ["Next.js", "Multi-tenant dashboard architecture"],
-    link: "https://app.152.70.130.154.nip.io/",
+    link: "https://barighor.infec.tech/",
     categories: ["SaaS"],
   },
   {
@@ -85,6 +85,7 @@ const primeOms = {
   description:
     "A complete commerce operating system: one platform to manage stock, sales, orders, and public-facing storefronts, so a business runs its entire commerce operation, inventory, fulfillment, and the store customers actually see, from a single system of record instead of stitching together spreadsheets, a website builder, and a courier app.",
   nodes: ["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"],
+  link: "https://primeoms.infec.tech",
 };
 
 const filters: Category[] = ["All", "AI", "E-Commerce", "SaaS", "HR Tech", "Local Services"];
@@ -220,12 +221,23 @@ export default function FeaturedProjects() {
                 ))}
               </div>
 
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
-              >
-                Get early access
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={primeOms.link}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
+                >
+                  Visit PrimeOMS
+                  <ArrowUpRight size={16} />
+                </a>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-ink text-sm font-semibold transition-colors duration-150 ease-out hover:border-border-hover active:scale-[0.97]"
+                >
+                  Get early access
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

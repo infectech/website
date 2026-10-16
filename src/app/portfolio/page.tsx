@@ -37,7 +37,7 @@ const projects = [
     description:
       "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history.",
     tech: ["Next.js", "Multi-tenant dashboard architecture"],
-    link: "https://app.152.70.130.154.nip.io/",
+    link: "https://barighor.infec.tech/",
     categories: ["SaaS"] as Category[],
   },
   {
@@ -203,12 +203,23 @@ export default function PortfolioPage() {
                 )}
               </div>
 
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
-              >
-                Get early access
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="https://primeoms.infec.tech"
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
+                >
+                  Visit PrimeOMS
+                  <ArrowUpRight size={16} />
+                </a>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-ink text-sm font-semibold transition-colors duration-150 ease-out hover:border-border-hover active:scale-[0.97]"
+                >
+                  Get early access
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
