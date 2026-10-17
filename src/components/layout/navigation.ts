@@ -146,16 +146,23 @@ export const MENUS: NavMenu[] = [
           },
           {
             href: "https://fc.daffodilglobal.ai",
-            label: "Daffodil F-Commerce OS",
+            label: "AmarBiz",
             description: "Operating system for Facebook and Instagram sellers.",
             icon: Boxes,
             external: true,
           },
           {
-            href: "https://app.152.70.130.154.nip.io/",
+            href: "https://barighor.infec.tech/",
             label: "Barighor",
-            description: "Digital rent management for landlords.",
+            description: "Digital rent management for landlords. Flagship.",
             icon: Building2,
+            external: true,
+          },
+          {
+            href: "https://primeoms.infec.tech",
+            label: "PrimeOMS",
+            description: "Unified order management & front store. Flagship.",
+            icon: Route,
             external: true,
           },
           {
@@ -176,12 +183,6 @@ export const MENUS: NavMenu[] = [
             description: "AI conversation intelligence at scale.",
             icon: Bot,
             external: true,
-          },
-          {
-            href: "/#primeoms",
-            label: "PrimeOMS",
-            description: "Order management for merchants. In progress.",
-            icon: Route,
           },
           {
             href: "/#featured-projects",

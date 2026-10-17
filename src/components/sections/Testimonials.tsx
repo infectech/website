@@ -8,17 +8,17 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 const testimonials = [
   {
     quote: "Setup took 10 minutes. I wish I had this three years ago.",
-    role: "Seller using the Daffodil F-Commerce OS",
+    role: "Seller using the AmarBiz",
     location: "Chattogram",
   },
   {
     quote: "AI analytics showed exactly which products were bleeding money.",
-    role: "Seller using the Daffodil F-Commerce OS",
+    role: "Seller using the AmarBiz",
     location: "Chattogram",
   },
   {
     quote: "COD reconciliation went from three hours to thirty seconds.",
-    role: "Seller using the Daffodil F-Commerce OS",
+    role: "Seller using the AmarBiz",
     location: "Rajshahi",
   },
   {

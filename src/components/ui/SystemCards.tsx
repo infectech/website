@@ -10,8 +10,7 @@ type System = {
   name: string;
   status: "live" | "building";
   href: string;
-  /** Live products sit on their own domains; PrimeOMS is still in progress,
-   *  so it points at its section on this site instead. */
+  /** Live products sit on their own domains. */
   external?: boolean;
   /** Offsets this card into a different part of the shared noise field. */
   seed: number;
@@ -29,7 +28,7 @@ const SYSTEMS: System[] = [
   },
   {
     domain: "Commerce",
-    name: "F-Commerce OS",
+    name: "AmarBiz",
     status: "live",
     href: "https://fc.daffodilglobal.ai",
     external: true,
@@ -39,7 +38,7 @@ const SYSTEMS: System[] = [
     domain: "PropTech",
     name: "Barighor",
     status: "live",
-    href: "https://app.152.70.130.154.nip.io/",
+    href: "https://barighor.infec.tech/",
     external: true,
     seed: 4.8,
   },
@@ -62,8 +61,9 @@ const SYSTEMS: System[] = [
   {
     domain: "Orders",
     name: "PrimeOMS",
-    status: "building",
-    href: "/#primeoms",
+    status: "live",
+    href: "https://primeoms.infec.tech",
+    external: true,
     seed: 12.2,
   },
 ];

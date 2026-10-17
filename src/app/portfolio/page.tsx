@@ -3,6 +3,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import NodeDiagram from "@/components/ui/NodeDiagram";
 import TiltCard from "@/components/ui/TiltCard";
@@ -18,10 +19,11 @@ const projects = [
       "AI-driven CV screening, candidate matching, video-interview analysis, attrition prediction, performance management, and workforce planning in one cloud platform.",
     tech: ["Next.js", "AI/ML matching engine", "Cloud-native architecture"],
     link: "https://aihr.daffodilglobal.ai",
+    logo: "/aihr.png",
     categories: ["AI", "HR Tech"] as Category[],
   },
   {
-    title: "Daffodil — F-Commerce OS",
+    title: "AmarBiz",
     tagline: "Operating system for Facebook & Instagram sellers",
     industry: "E-Commerce / SaaS",
     description:
@@ -31,16 +33,6 @@ const projects = [
     categories: ["AI", "E-Commerce", "SaaS"] as Category[],
   },
   {
-    title: "Barighor",
-    tagline: "Digital rent management for landlords",
-    industry: "PropTech / SaaS",
-    description:
-      "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history.",
-    tech: ["Next.js", "Multi-tenant dashboard architecture"],
-    link: "https://barighor.infec.tech/",
-    categories: ["SaaS"] as Category[],
-  },
-  {
     title: "Grameen Pest Control",
     tagline: "Bilingual service platform for a 35-year-old pest control company",
     industry: "Local Services / SMB",
@@ -48,6 +40,7 @@ const projects = [
       "A full bilingual (Bangla/English) service site with live WhatsApp booking, per-service landing pages, and package pricing, serving enterprise clients including Square Group, Beximco, Bashundhara Group, Walton, and KFC Bangladesh.",
     tech: ["Localized front-end", "WhatsApp booking integration"],
     link: "https://grameenpestbd.com",
+    logo: "/grameenpest.png",
     categories: ["Local Services"] as Category[],
   },
   {
@@ -57,7 +50,55 @@ const projects = [
     description: "An AI-powered platform for analyzing and surfacing insight from conversations at scale.",
     tech: ["Applied AI / NLP"],
     link: "https://sonic-cyan.vercel.app",
+    logo: "/sonic.png",
     categories: ["AI"] as Category[],
+  },
+  {
+    title: "Rookiesdnmco",
+    tagline: "Full-stack storefront & admin solution",
+    industry: "E-Commerce / Retail",
+    description:
+      "A complete e-commerce solution: customer-facing storefront paired with an admin panel built on the PrimeOMS platform, covering catalog, orders, and fulfillment end to end.",
+    tech: ["PrimeOMS integration", "Storefront", "Admin panel"],
+    link: "https://rookiesdnmco.com",
+    logo: "/rookies.png",
+    categories: ["E-Commerce"] as Category[],
+  },
+  {
+    title: "Memoriqo",
+    tagline: "Custom websites for life's biggest moments",
+    industry: "Digital Gifting / Personal",
+    description:
+      "A digital wish platform: custom-built websites for birthdays, wedding invitations, anniversaries, and other celebrations, turning a simple message into a shareable, personalized experience.",
+    tech: ["Next.js", "Custom templating"],
+    link: "https://memoriqo.infec.tech",
+    logo: "/memoriqo.png",
+    categories: ["SaaS"] as Category[],
+  },
+];
+
+const flagships = [
+  {
+    title: "PrimeOMS",
+    subtitle: "Unified E-Commerce Order Management & Front Store Platform",
+    industry: "E-Commerce Infrastructure",
+    description:
+      "A complete commerce operating system: one platform to manage stock, sales, orders, and public-facing storefronts, so a business runs its entire commerce operation from a single system of record instead of stitching together spreadsheets, a website builder, and a courier app.",
+    nodes: ["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"],
+    link: "https://primeoms.infec.tech",
+    logo: "/primeoms.png",
+    showNodeDiagram: true,
+  },
+  {
+    title: "Barighor",
+    subtitle: "Digital rent management for landlords",
+    industry: "PropTech / SaaS",
+    description:
+      "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history, built bilingually for the Bangladesh market.",
+    nodes: ["Tenant Portal", "Automatic Invoicing", "Multi-Building Dashboard", "Payment History"],
+    link: "https://barighor.infec.tech/",
+    logo: "/barighor.png",
+    showNodeDiagram: false,
   },
 ];
 
@@ -121,12 +162,19 @@ export default function PortfolioPage() {
                 className="group flex flex-col h-full p-7 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
               >
                 <div className="flex items-start justify-between gap-4 mb-3">
-                  <div>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-success mb-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true" />
-                      Live
-                    </span>
-                    <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
+                  <div className="flex items-start gap-3">
+                    {p.logo && (
+                      <div className="w-10 h-10 rounded-lg border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
+                        <Image src={p.logo} alt={`${p.title} logo`} width={28} height={28} className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-success mb-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true" />
+                        Live
+                      </span>
+                      <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
+                    </div>
                   </div>
                   <ArrowUpRight
                     size={20}
@@ -153,45 +201,47 @@ export default function PortfolioPage() {
           ))}
         </div>
 
-        {(filter === "All" || filter === "E-Commerce" || filter === "SaaS") && (
-          <motion.div
-            id="primeoms"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="relative overflow-hidden rounded-3xl border border-warning/30 bg-gradient-to-br from-bg-primary to-bg-surface p-8 sm:p-12 scroll-mt-24"
-          >
-            <NodeDiagram className="absolute inset-0 w-full h-full opacity-30" />
-            <div className="relative z-10">
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-warning mb-4 px-3 py-1 rounded-full border border-warning/30 bg-warning/10">
-                Building now
-              </span>
-              <h3 className="display-lg text-3xl sm:text-5xl text-ink mb-2">
-                PrimeOMS
-              </h3>
-              <p className="text-text-secondary mb-1">
-                Unified E-Commerce Order Management & Front Store Platform
-              </p>
-              <p className="text-xs font-mono text-text-secondary/70 mb-6">
-                E-Commerce Infrastructure
-              </p>
-              <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-3xl mb-8">
-                A complete commerce operating system: one platform to manage
-                stock, sales, orders, and public-facing storefronts, so a
-                business runs its entire commerce operation from a single
-                system of record instead of stitching together spreadsheets,
-                a website builder, and a courier app.
-              </p>
+        <div className="space-y-6 mb-6">
+          {flagships.map((flagship) => (
+            <motion.div
+              key={flagship.title}
+              id={flagship.title.toLowerCase()}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-bg-primary to-bg-surface p-8 sm:p-12 scroll-mt-24 transition-colors duration-300 hover:border-border-hover"
+            >
+              {flagship.showNodeDiagram && (
+                <NodeDiagram className="absolute inset-0 w-full h-full opacity-30" />
+              )}
+              <div className="relative z-10">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand mb-4 px-3 py-1 rounded-full border border-brand/30 bg-brand/10">
+                  Flagship
+                </span>
+                <div className="flex items-center gap-4 mb-2">
+                  {flagship.logo && (
+                    <div className="w-14 h-14 rounded-xl border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
+                      <Image src={flagship.logo} alt={`${flagship.title} logo`} width={40} height={40} className="object-contain" />
+                    </div>
+                  )}
+                  <h3 className="display-lg text-3xl sm:text-5xl text-ink">
+                    {flagship.title}
+                  </h3>
+                </div>
+                <p className="text-text-secondary mb-1">{flagship.subtitle}</p>
+                <p className="text-xs font-mono text-text-secondary/70 mb-6">{flagship.industry}</p>
+                <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-3xl mb-8">
+                  {flagship.description}
+                </p>
 
-              <div className="flex flex-wrap items-center gap-3 mb-8">
-                {["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"].map(
-                  (node, i, arr) => (
+                <div className="flex flex-wrap items-center gap-3 mb-8">
+                  {flagship.nodes.map((node, i) => (
                     <div key={node} className="flex items-center gap-3">
                       <span className="px-4 py-2 rounded-xl border border-border bg-bg-surface text-sm font-medium text-ink">
                         {node}
                       </span>
-                      {i < arr.length - 1 && (
+                      {i < flagship.nodes.length - 1 && (
                         <ArrowUpRight
                           size={16}
                           className="rotate-45 text-text-secondary/50 shrink-0"
@@ -199,30 +249,22 @@ export default function PortfolioPage() {
                         />
                       )}
                     </div>
-                  )
-                )}
-              </div>
+                  ))}
+                </div>
 
-              <div className="flex flex-wrap items-center gap-3">
                 <a
-                  href="https://primeoms.infec.tech"
+                  href={flagship.link}
                   target="_blank"
                   rel="noopener"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
                 >
-                  Visit PrimeOMS
+                  Visit {flagship.title}
                   <ArrowUpRight size={16} />
                 </a>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-ink text-sm font-semibold transition-colors duration-150 ease-out hover:border-border-hover active:scale-[0.97]"
-                >
-                  Get early access
-                </a>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

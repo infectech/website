@@ -37,7 +37,7 @@ const projects: Project[] = [
     categories: ["AI", "HR Tech"],
   },
   {
-    title: "Daffodil — F-Commerce OS",
+    title: "AmarBiz",
     tagline: "Operating system for Facebook & Instagram sellers",
     status: "Live",
     industry: "E-Commerce / SaaS",
@@ -46,18 +46,6 @@ const projects: Project[] = [
     tech: ["AI order intelligence", "Multi-courier integration", "Payments infrastructure"],
     link: "https://fc.daffodilglobal.ai",
     categories: ["AI", "E-Commerce", "SaaS"],
-  },
-  {
-    title: "Barighor",
-    tagline: "Digital rent management for landlords",
-    status: "Live",
-    industry: "PropTech / SaaS",
-    description:
-      "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history, built bilingually for the Bangladesh market.",
-    tech: ["Next.js", "Multi-tenant dashboard architecture"],
-    link: "https://barighor.infec.tech/",
-    logo: "/barighor.png",
-    categories: ["SaaS"],
   },
   {
     title: "Grameen Pest Control",
@@ -82,18 +70,56 @@ const projects: Project[] = [
     logo: "/sonic.png",
     categories: ["AI"],
   },
+  {
+    title: "Rookiesdnmco",
+    tagline: "Full-stack storefront & admin solution",
+    status: "Live",
+    industry: "E-Commerce / Retail",
+    description:
+      "A complete e-commerce solution: customer-facing storefront paired with an admin panel built on the PrimeOMS platform, covering catalog, orders, and fulfillment end to end.",
+    tech: ["PrimeOMS integration", "Storefront", "Admin panel"],
+    link: "https://rookiesdnmco.com",
+    logo: "/rookies.png",
+    categories: ["E-Commerce"],
+  },
+  {
+    title: "Memoriqo",
+    tagline: "Custom websites for life's biggest moments",
+    status: "Live",
+    industry: "Digital Gifting / Personal",
+    description:
+      "A digital wish platform: custom-built websites for birthdays, wedding invitations, anniversaries, and other celebrations, turning a simple message into a shareable, personalized experience.",
+    tech: ["Next.js", "Custom templating"],
+    link: "https://memoriqo.infec.tech",
+    logo: "/memoriqo.png",
+    categories: ["SaaS"],
+  },
 ];
 
-const primeOms = {
-  title: "PrimeOMS",
-  subtitle: "Unified E-Commerce Order Management & Front Store Platform",
-  industry: "E-Commerce Infrastructure",
-  description:
-    "A complete commerce operating system: one platform to manage stock, sales, orders, and public-facing storefronts, so a business runs its entire commerce operation, inventory, fulfillment, and the store customers actually see, from a single system of record instead of stitching together spreadsheets, a website builder, and a courier app.",
-  nodes: ["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"],
-  link: "https://primeoms.infec.tech",
-  logo: "/primeoms.png",
-};
+const flagships = [
+  {
+    title: "PrimeOMS",
+    subtitle: "Unified E-Commerce Order Management & Front Store Platform",
+    industry: "E-Commerce Infrastructure",
+    description:
+      "A complete commerce operating system: one platform to manage stock, sales, orders, and public-facing storefronts, so a business runs its entire commerce operation, inventory, fulfillment, and the store customers actually see, from a single system of record instead of stitching together spreadsheets, a website builder, and a courier app.",
+    nodes: ["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"],
+    link: "https://primeoms.infec.tech",
+    logo: "/primeoms.png",
+    showNodeDiagram: true,
+  },
+  {
+    title: "Barighor",
+    subtitle: "Digital rent management for landlords",
+    industry: "PropTech / SaaS",
+    description:
+      "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history, built bilingually for the Bangladesh market.",
+    nodes: ["Tenant Portal", "Automatic Invoicing", "Multi-Building Dashboard", "Payment History"],
+    link: "https://barighor.infec.tech/",
+    logo: "/barighor.png",
+    showNodeDiagram: false,
+  },
+];
 
 const filters: Category[] = ["All", "AI", "E-Commerce", "SaaS", "HR Tech", "Local Services"];
 
@@ -195,73 +221,70 @@ export default function FeaturedProjects() {
           ))}
         </div>
 
-        {(filter === "All" || filter === "E-Commerce" || filter === "SaaS") && (
-          <motion.div
-            id="primeoms"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-            className="relative overflow-hidden rounded-3xl border border-warning/30 bg-gradient-to-br from-bg-primary to-bg-surface p-8 sm:p-12 transition-colors duration-300 hover:border-warning/50"
-          >
-            <NodeDiagram className="absolute inset-0 w-full h-full opacity-30" />
-            <div className="relative z-10">
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-warning mb-4 px-3 py-1 rounded-full border border-warning/30 bg-warning/10">
-                Building now
-              </span>
-              <div className="flex items-center gap-4 mb-2">
-                {primeOms.logo && (
-                  <div className="w-14 h-14 rounded-xl border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
-                    <Image src={primeOms.logo} alt={`${primeOms.title} logo`} width={40} height={40} className="object-contain" />
-                  </div>
-                )}
-                <h3 className="display-lg text-3xl sm:text-5xl text-ink">
-                  {primeOms.title}
-                </h3>
-              </div>
-              <p className="text-text-secondary mb-1">{primeOms.subtitle}</p>
-              <p className="text-xs font-mono text-text-secondary/70 mb-6">{primeOms.industry}</p>
-              <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-3xl mb-8">
-                {primeOms.description}
-              </p>
+        <div className="space-y-6 mb-6">
+          {flagships.map((flagship) => (
+            <motion.div
+              key={flagship.title}
+              id={flagship.title.toLowerCase()}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+              className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-bg-primary to-bg-surface p-8 sm:p-12 transition-colors duration-300 hover:border-border-hover"
+            >
+              {flagship.showNodeDiagram && (
+                <NodeDiagram className="absolute inset-0 w-full h-full opacity-30" />
+              )}
+              <div className="relative z-10">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand mb-4 px-3 py-1 rounded-full border border-brand/30 bg-brand/10">
+                  Flagship
+                </span>
+                <div className="flex items-center gap-4 mb-2">
+                  {flagship.logo && (
+                    <div className="w-14 h-14 rounded-xl border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
+                      <Image src={flagship.logo} alt={`${flagship.title} logo`} width={40} height={40} className="object-contain" />
+                    </div>
+                  )}
+                  <h3 className="display-lg text-3xl sm:text-5xl text-ink">
+                    {flagship.title}
+                  </h3>
+                </div>
+                <p className="text-text-secondary mb-1">{flagship.subtitle}</p>
+                <p className="text-xs font-mono text-text-secondary/70 mb-6">{flagship.industry}</p>
+                <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-3xl mb-8">
+                  {flagship.description}
+                </p>
 
-              <div className="flex flex-wrap items-center gap-3 mb-8">
-                {primeOms.nodes.map((node, i) => (
-                  <div key={node} className="flex items-center gap-3">
-                    <span className="px-4 py-2 rounded-xl border border-border bg-bg-surface text-sm font-medium text-ink">
-                      {node}
-                    </span>
-                    {i < primeOms.nodes.length - 1 && (
-                      <ArrowUpRight
-                        size={16}
-                        className="rotate-45 text-text-secondary/50 shrink-0"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
+                <div className="flex flex-wrap items-center gap-3 mb-8">
+                  {flagship.nodes.map((node, i) => (
+                    <div key={node} className="flex items-center gap-3">
+                      <span className="px-4 py-2 rounded-xl border border-border bg-bg-surface text-sm font-medium text-ink">
+                        {node}
+                      </span>
+                      {i < flagship.nodes.length - 1 && (
+                        <ArrowUpRight
+                          size={16}
+                          className="rotate-45 text-text-secondary/50 shrink-0"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
 
-              <div className="flex flex-wrap items-center gap-3">
                 <a
-                  href={primeOms.link}
+                  href={flagship.link}
                   target="_blank"
                   rel="noopener"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold transition-transform duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0"
                 >
-                  Visit PrimeOMS
+                  Visit {flagship.title}
                   <ArrowUpRight size={16} />
                 </a>
-                <a
-                  href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-ink text-sm font-semibold transition-colors duration-150 ease-out hover:border-border-hover active:scale-[0.97]"
-                >
-                  Get early access
-                </a>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

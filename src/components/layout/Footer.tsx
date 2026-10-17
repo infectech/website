@@ -21,11 +21,13 @@ const columns = {
   ],
   Products: [
     { href: "https://aihr.daffodilglobal.ai", label: "AIHR", external: true },
-    { href: "https://fc.daffodilglobal.ai", label: "Daffodil F-Commerce OS", external: true },
+    { href: "https://fc.daffodilglobal.ai", label: "AmarBiz", external: true },
     { href: "https://barighor.infec.tech/", label: "Barighor", external: true },
     { href: "https://grameenpestbd.com", label: "Grameen Pest Control", external: true },
     { href: "https://sonic-cyan.vercel.app", label: "Sonic", external: true },
-    { href: "https://primeoms.infec.tech", label: "PrimeOMS (in progress)", external: true },
+    { href: "https://primeoms.infec.tech", label: "PrimeOMS", external: true },
+    { href: "https://rookiesdnmco.com", label: "Rookiesdnmco", external: true },
+    { href: "https://memoriqo.infec.tech", label: "Memoriqo", external: true },
   ],
   Resources: [
     { href: "/#blog", label: "Blog" },
