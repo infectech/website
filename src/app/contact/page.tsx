@@ -17,10 +17,8 @@ const serviceOptions = [
   "Business Automation",
   "API Development",
   "UI/UX Design & Product Strategy",
+  "Other",
 ];
-
-const budgetOptions = ["Under $10k", "$10k - $30k", "$30k - $75k", "$75k+", "Not sure yet"];
-const timelineOptions = ["Less than 1 month", "1-3 months", "3-6 months", "6+ months", "Flexible"];
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -208,49 +206,6 @@ export default function ContactPage() {
                       </option>
                     ))}
                   </select>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-ink mb-2">
-                      Budget range
-                    </label>
-                    <select
-                      id="budget"
-                      name="budget"
-                      defaultValue=""
-                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
-                    >
-                      <option value="" disabled className="bg-bg-surface">
-                        Select a range
-                      </option>
-                      {budgetOptions.map((opt) => (
-                        <option key={opt} value={opt} className="bg-bg-surface">
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="timeline" className="block text-sm font-medium text-ink mb-2">
-                      Timeline
-                    </label>
-                    <select
-                      id="timeline"
-                      name="timeline"
-                      defaultValue=""
-                      className="w-full px-4 py-3 rounded-xl bg-bg-surface border border-border text-ink text-sm focus:outline-none focus:border-ink focus:ring-2 focus:ring-ink/10 transition-colors"
-                    >
-                      <option value="" disabled className="bg-bg-surface">
-                        Select a timeline
-                      </option>
-                      {timelineOptions.map((opt) => (
-                        <option key={opt} value={opt} className="bg-bg-surface">
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
                 </div>
 
                 <div>

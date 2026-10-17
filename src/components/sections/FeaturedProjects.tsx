@@ -3,6 +3,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import NodeDiagram from "@/components/ui/NodeDiagram";
 import TiltCard from "@/components/ui/TiltCard";
@@ -18,6 +19,7 @@ type Project = {
   tech: string[];
   link?: string;
   cta?: string;
+  logo?: string;
   categories: Category[];
 };
 
@@ -31,6 +33,7 @@ const projects: Project[] = [
       "AI-driven CV screening, candidate matching, video-interview analysis, attrition prediction, performance management, and workforce planning in one cloud platform.",
     tech: ["Next.js", "AI/ML matching engine", "Cloud-native architecture"],
     link: "https://aihr.daffodilglobal.ai",
+    logo: "/aihr.png",
     categories: ["AI", "HR Tech"],
   },
   {
@@ -53,6 +56,7 @@ const projects: Project[] = [
       "Replaces the paper rent notebook: automatic monthly invoicing, a self-serve tenant portal, multi-building dashboards, and full payment history, built bilingually for the Bangladesh market.",
     tech: ["Next.js", "Multi-tenant dashboard architecture"],
     link: "https://barighor.infec.tech/",
+    logo: "/barighor.png",
     categories: ["SaaS"],
   },
   {
@@ -64,6 +68,7 @@ const projects: Project[] = [
       "A full bilingual (Bangla/English) service site with live WhatsApp booking, per-service landing pages, and package pricing, serving enterprise clients including Square Group, Beximco, Bashundhara Group, Walton, and KFC Bangladesh.",
     tech: ["Localized front-end", "WhatsApp booking integration"],
     link: "https://grameenpestbd.com",
+    logo: "/grameenpest.png",
     categories: ["Local Services"],
   },
   {
@@ -74,6 +79,7 @@ const projects: Project[] = [
     description: "An AI-powered platform for analyzing and surfacing insight from conversations at scale.",
     tech: ["Applied AI / NLP"],
     link: "https://sonic-cyan.vercel.app",
+    logo: "/sonic.png",
     categories: ["AI"],
   },
 ];
@@ -86,6 +92,7 @@ const primeOms = {
     "A complete commerce operating system: one platform to manage stock, sales, orders, and public-facing storefronts, so a business runs its entire commerce operation, inventory, fulfillment, and the store customers actually see, from a single system of record instead of stitching together spreadsheets, a website builder, and a courier app.",
   nodes: ["Inventory & Stock", "Order Management", "Front Store", "Fulfillment"],
   link: "https://primeoms.infec.tech",
+  logo: "/primeoms.png",
 };
 
 const filters: Category[] = ["All", "AI", "E-Commerce", "SaaS", "HR Tech", "Local Services"];
@@ -149,12 +156,19 @@ export default function FeaturedProjects() {
                 className="group flex flex-col h-full p-7 rounded-2xl border border-border hover:border-border-hover transition-colors duration-300"
               >
                 <div className="flex items-start justify-between gap-4 mb-3">
-                  <div>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-success mb-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true" />
-                      Live
-                    </span>
-                    <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
+                  <div className="flex items-start gap-3">
+                    {p.logo && (
+                      <div className="w-10 h-10 rounded-lg border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
+                        <Image src={p.logo} alt={`${p.title} logo`} width={28} height={28} className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-success mb-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-success" aria-hidden="true" />
+                        Live
+                      </span>
+                      <h3 className="text-xl font-semibold text-ink">{p.title}</h3>
+                    </div>
                   </div>
                   <ArrowUpRight
                     size={20}
@@ -195,9 +209,16 @@ export default function FeaturedProjects() {
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-warning mb-4 px-3 py-1 rounded-full border border-warning/30 bg-warning/10">
                 Building now
               </span>
-              <h3 className="display-lg text-3xl sm:text-5xl text-ink mb-2">
-                {primeOms.title}
-              </h3>
+              <div className="flex items-center gap-4 mb-2">
+                {primeOms.logo && (
+                  <div className="w-14 h-14 rounded-xl border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
+                    <Image src={primeOms.logo} alt={`${primeOms.title} logo`} width={40} height={40} className="object-contain" />
+                  </div>
+                )}
+                <h3 className="display-lg text-3xl sm:text-5xl text-ink">
+                  {primeOms.title}
+                </h3>
+              </div>
               <p className="text-text-secondary mb-1">{primeOms.subtitle}</p>
               <p className="text-xs font-mono text-text-secondary/70 mb-6">{primeOms.industry}</p>
               <p className="text-sm sm:text-base text-text-secondary leading-relaxed max-w-3xl mb-8">
