@@ -164,8 +164,8 @@ export default function PortfolioPage() {
                 <div className="flex items-start justify-between gap-4 mb-3">
                   <div className="flex items-start gap-3">
                     {p.logo && (
-                      <div className="w-10 h-10 rounded-lg border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
-                        <Image src={p.logo} alt={`${p.title} logo`} width={28} height={28} className="object-contain" />
+                      <div className="w-14 h-14 rounded-xl border border-border bg-bg-surface flex items-center justify-center shrink-0 overflow-hidden">
+                        <Image src={p.logo} alt={`${p.title} logo`} width={44} height={44} className="object-contain" />
                       </div>
                     )}
                     <div>
