@@ -4,6 +4,7 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Clock, ArrowRight, Check, AlertCircle } from "lucide-react";
+import { LinkedinIcon, FacebookIcon } from "@/components/ui/SocialIcons";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdnzepe";
 
@@ -110,6 +111,42 @@ export default function ContactPage() {
                     Response time
                   </div>
                   <div className="text-sm font-semibold text-ink">Within one business day</div>
+                </div>
+              </div>
+              <div className="flex gap-4 p-5 rounded-xl border border-border">
+                <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center shrink-0">
+                  <LinkedinIcon size={18} className="text-ink" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-0.5">
+                    LinkedIn
+                  </div>
+                  <a
+                    href="https://www.linkedin.com/company/infectechltd"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-sm font-semibold text-ink hover:text-brand-hover transition-colors"
+                  >
+                    infectechltd
+                  </a>
+                </div>
+              </div>
+              <div className="flex gap-4 p-5 rounded-xl border border-border">
+                <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center shrink-0">
+                  <FacebookIcon size={18} className="text-ink" />
+                </div>
+                <div>
+                  <div className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-0.5">
+                    Facebook
+                  </div>
+                  <a
+                    href="https://www.facebook.com/infectechltd"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-sm font-semibold text-ink hover:text-brand-hover transition-colors"
+                  >
+                    infectechltd
+                  </a>
                 </div>
               </div>
             </div>

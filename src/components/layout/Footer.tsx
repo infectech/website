@@ -40,10 +40,10 @@ const columns = {
 };
 
 const socials = [
-  { href: "https://linkedin.com", icon: LinkedinIcon, label: "LinkedIn" },
+  { href: "https://www.linkedin.com/company/infectechltd", icon: LinkedinIcon, label: "LinkedIn" },
   { href: "https://github.com/infectech", icon: GithubIcon, label: "GitHub" },
   {
-    href: "https://www.facebook.com/profile.php?id=61591848793213",
+    href: "https://www.facebook.com/infectechltd",
     icon: FacebookIcon,
     label: "Facebook",
   },
@@ -93,6 +93,21 @@ export default function Footer() {
                 <Phone size={14} />
                 +880 1326-561196
               </a>
+            </div>
+
+            <div className="flex items-center gap-4 mb-6">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={s.label}
+                  className="text-text-secondary hover:text-ink hover:-translate-y-0.5 active:scale-90 transition-all duration-200 ease-out"
+                >
+                  <s.icon size={16} />
+                </a>
+              ))}
             </div>
 
             <form onSubmit={handleSubscribe} className="max-w-sm">
@@ -154,24 +169,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-border flex justify-center">
           <p className="text-xs">
             © {new Date().getFullYear()} Infectech. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener"
-                aria-label={s.label}
-                className="text-text-secondary hover:text-ink hover:-translate-y-0.5 active:scale-90 transition-all duration-200 ease-out"
-              >
-                <s.icon size={16} />
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
