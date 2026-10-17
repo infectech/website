@@ -2,12 +2,12 @@
 
 const brands = [
   "Daffodil Global AI",
-  "Square Group",
-  "Beximco",
-  "Bashundhara Group",
-  "Walton",
-  "KFC Bangladesh",
-  "Pran-RFL",
+  "Rookiesdnmco",
+  "Grameen Pest Control",
+  "AIHR",
+  "Barighor",
+  "PrimeOMS",
+  "Memoriqo",
 ];
 
 export default function TrustedBy() {
