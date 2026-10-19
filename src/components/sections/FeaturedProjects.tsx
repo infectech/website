@@ -45,6 +45,7 @@ const projects: Project[] = [
       "Captures inbox orders automatically, routes each order to the best courier (Pathao, RedX, Steadfast, Paperfly, Carrybee), reconciles COD in seconds, and uses AI to flag risky orders before they cost the seller money. Integrates bKash, Nagad, Rocket, SSLCommerz, and Upay.",
     tech: ["AI order intelligence", "Multi-courier integration", "Payments infrastructure"],
     link: "https://fc.daffodilglobal.ai",
+    logo: "/amarbiz.png",
     categories: ["AI", "E-Commerce", "SaaS"],
   },
   {
@@ -93,6 +94,17 @@ const projects: Project[] = [
     link: "https://memoriqo.infec.tech",
     logo: "/memoriqo.png",
     categories: ["SaaS"],
+  },
+  {
+    title: "Infectech Agents",
+    tagline: "We make agents. All kinds of agents.",
+    status: "Live",
+    industry: "AI / Agent Engineering",
+    description:
+      "A custom agent foundry: research, support, sales, coding, voice, ops, data analysis, browser automation, finance, recruiting, legal, and personal-assistant agents, built to perceive, reason, remember, use tools, and act with human approval, then deployed to a client's cloud, Infectech's cloud, or on-premise.",
+    tech: ["Claude / GPT / Gemini", "RAG & long-term memory", "Multi-agent orchestration"],
+    link: "https://agent.infec.tech",
+    categories: ["AI"],
   },
 ];
 
