@@ -62,6 +62,27 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Infectech",
+  url: "https://infec.tech",
+  logo: "https://infec.tech/images/logo%20black.png",
+  description:
+    "Infectech is a software engineering studio that designs, builds, and scales production systems: AI platforms, commerce infrastructure, and enterprise software.",
+  sameAs: [
+    "https://www.linkedin.com/company/infectechltd",
+    "https://www.facebook.com/infectechltd",
+  ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Infectech",
+  url: "https://infec.tech",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +97,14 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-bg-primary text-text-primary"
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         {/*
           Runs before the overlay below is parsed, so a reload within the same
           visit never flashes the greeting: the server cannot know whether this
