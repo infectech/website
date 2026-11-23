@@ -93,12 +93,12 @@ export default function ContactClient() {
                     Call or WhatsApp
                   </div>
                   <a
-                    href="https://wa.me/8801326561196"
+                    href="https://wa.me/8801533113908"
                     target="_blank"
                     rel="noopener"
                     className="text-sm font-semibold text-ink hover:text-brand-hover transition-colors"
                   >
-                    +880 1326-561196
+                    +880 1533-113908
                   </a>
                 </div>
               </div>

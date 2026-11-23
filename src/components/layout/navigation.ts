@@ -18,7 +18,6 @@ import {
   ShoppingBag,
   Smartphone,
   Sparkles,
-  Users,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -220,12 +219,6 @@ export const MENUS: NavMenu[] = [
             label: "About Infectech",
             description: "A studio that ships production systems, not demos.",
             icon: Building2,
-          },
-          {
-            href: "/#team",
-            label: "The team",
-            description: "A small, senior team. Everyone here ships code.",
-            icon: Users,
           },
           {
             href: "/#why-infectech",

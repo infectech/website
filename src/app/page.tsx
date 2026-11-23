@@ -8,7 +8,6 @@ import Process from "@/components/sections/Process";
 import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import Statistics from "@/components/sections/Statistics";
 import Testimonials from "@/components/sections/Testimonials";
-import Team from "@/components/sections/Team";
 import Blog from "@/components/sections/Blog";
 import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
@@ -34,7 +33,6 @@ export default function HomePage() {
       <FeaturedProjects />
       <Statistics />
       <Testimonials />
-      <Team />
       <Blog />
       <FAQ />
       <CTA />

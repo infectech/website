@@ -85,13 +85,13 @@ export default function Footer() {
                 infectech.official@gmail.com
               </a>
               <a
-                href="https://wa.me/8801326561196"
+                href="https://wa.me/8801533113908"
                 target="_blank"
                 rel="noopener"
                 className="inline-flex items-center gap-2 text-sm text-ink hover:text-accent transition-colors"
               >
                 <Phone size={14} />
-                +880 1326-561196
+                +880 1533-113908
               </a>
             </div>
 

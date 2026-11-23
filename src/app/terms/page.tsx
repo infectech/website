@@ -101,8 +101,8 @@ export default function TermsPage() {
             infectech.official@gmail.com
           </a>{" "}
           or{" "}
-          <a href="https://wa.me/8801326561196" target="_blank" rel="noopener">
-            +880 1326-561196
+          <a href="https://wa.me/8801533113908" target="_blank" rel="noopener">
+            +880 1533-113908
           </a>
           .
         </p>
