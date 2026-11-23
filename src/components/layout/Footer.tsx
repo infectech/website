@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone } from "lucide-react";
-import { LinkedinIcon, GithubIcon, FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import { LinkedinIcon, GithubIcon, FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 const columns = {
   Company: [
@@ -48,6 +48,7 @@ const socials = [
     label: "Facebook",
   },
   { href: "https://instagram.com", icon: InstagramIcon, label: "Instagram" },
+  { href: "https://wa.me/8801533113908", icon: WhatsAppIcon, label: "WhatsApp" },
 ];
 
 export default function Footer() {

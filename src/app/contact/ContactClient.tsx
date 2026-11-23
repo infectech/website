@@ -3,8 +3,8 @@ import useSafeReducedMotion from "@/lib/useSafeReducedMotion";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Clock, ArrowRight, Check, AlertCircle } from "lucide-react";
-import { LinkedinIcon, FacebookIcon } from "@/components/ui/SocialIcons";
+import { Mail, Clock, ArrowRight, Check, AlertCircle } from "lucide-react";
+import { LinkedinIcon, FacebookIcon, WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdnzepe";
 
@@ -86,7 +86,7 @@ export default function ContactClient() {
               </div>
               <div className="flex gap-4 p-5 rounded-xl border border-border">
                 <div className="w-10 h-10 rounded-lg bg-bg-primary border border-border flex items-center justify-center shrink-0">
-                  <Phone size={18} className="text-brand" />
+                  <WhatsAppIcon size={18} className="text-brand" />
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-0.5">
