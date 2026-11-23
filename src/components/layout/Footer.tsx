@@ -79,11 +79,11 @@ export default function Footer() {
             </p>
             <div className="flex flex-col items-start gap-2 mb-6">
               <a
-                href="mailto:infectech.official@gmail.com"
+                href="mailto:hello@infec.tech"
                 className="inline-flex items-center gap-2 text-sm text-ink hover:text-accent transition-colors"
               >
                 <Mail size={14} />
-                infectech.official@gmail.com
+                hello@infec.tech
               </a>
               <a
                 href="https://wa.me/8801533113908"

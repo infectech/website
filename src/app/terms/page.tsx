@@ -97,8 +97,8 @@ export default function TermsPage() {
       <Section heading="Contact">
         <p>
           Questions about these terms go to{" "}
-          <a href="mailto:infectech.official@gmail.com">
-            infectech.official@gmail.com
+          <a href="mailto:hello@infec.tech">
+            hello@infec.tech
           </a>{" "}
           or{" "}
           <a href="https://wa.me/8801533113908" target="_blank" rel="noopener">

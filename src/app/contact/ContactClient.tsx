@@ -77,10 +77,10 @@ export default function ContactClient() {
                     Email
                   </div>
                   <a
-                    href="mailto:infectech.official@gmail.com"
+                    href="mailto:hello@infec.tech"
                     className="text-sm font-semibold text-ink hover:text-brand-hover transition-colors"
                   >
-                    infectech.official@gmail.com
+                    hello@infec.tech
                   </a>
                 </div>
               </div>

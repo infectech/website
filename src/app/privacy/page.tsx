@@ -90,8 +90,8 @@ export default function PrivacyPage() {
         <p>
           You can ask us what we hold about you, ask for a copy, ask us to
           correct it, or ask us to delete it. Email{" "}
-          <a href="mailto:infectech.official@gmail.com">
-            infectech.official@gmail.com
+          <a href="mailto:hello@infec.tech">
+            hello@infec.tech
           </a>{" "}
           and we will action it. You do not need an account or a specific form
           of words, and there is no charge.
@@ -113,8 +113,8 @@ export default function PrivacyPage() {
       <Section heading="Contact">
         <p>
           Questions about this policy, or about anything above, go to{" "}
-          <a href="mailto:infectech.official@gmail.com">
-            infectech.official@gmail.com
+          <a href="mailto:hello@infec.tech">
+            hello@infec.tech
           </a>{" "}
           or{" "}
           <a href="https://wa.me/8801533113908" target="_blank" rel="noopener">
